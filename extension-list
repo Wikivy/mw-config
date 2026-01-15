@@ -1,0 +1,10 @@
+$IP/extensions/ConfirmEdit/hCaptcha/extension.json
+$IP/extensions/SocialProfile/SystemGifts/extension.json
+$IP/extensions/SocialProfile/UserActivity/extension.json
+$IP/extensions/SocialProfile/UserBoard/extension.json
+$IP/extensions/SocialProfile/UserGifts/extension.json
+$IP/extensions/SocialProfile/UserRelationship/extension.json
+$IP/extensions/SocialProfile/UserStats/extension.json
+$IP/extensions/SocialProfile/UserWelcome/extension.json
+$IP/extensions/Wikibase/extension-client.json
+$IP/extensions/Wikibase/extension-repo.json

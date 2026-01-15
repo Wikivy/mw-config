@@ -9,7 +9,9 @@ wfLoadExtensions([
 	'CookieWarning',
 	'ConfirmEdit',
 	'ConfirmEdit/hCaptcha',
+	'DataDump',
 	'DiscordNotifications',
+	'DismissableSiteNotice',
 	'Echo',
 	'EventBus',
 	'EventLogging',
@@ -24,9 +26,12 @@ wfLoadExtensions([
 	'OATHAuth',
 	'OAuth',
 	'ParserFunctions',
+	'PortableInfobox',
 	'RemovePII',
 	'SpamBlacklist',
 	'WikiDiscover',
 	'WikiEditor',
 	'cldr'
 ]);
+
+wfLoadExtension( 'Parsoid', "$IP/vendor/wikimedia/parsoid/extension.json" );
