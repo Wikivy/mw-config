@@ -465,6 +465,15 @@ $wgConf->settings += [
 			],
 		],
 
+		'wgCreateWikiDatabaseClusters' => [
+			'default' => [
+				'db01 (c1)' => 'c1',
+			],
+			'beta' => [
+				'db01 (c1)' => 'c1',
+			],
+		],
+
 		'wgCreateWikiDatabaseSuffix' => [
 			'default' => 'wiki',
 			'beta' => 'wikibeta',
@@ -556,8 +565,8 @@ $wgConf->settings += [
 			'default' => 5,
 		],
 		'wgCreateWikiSubdomain' => [
-			'default' => 'miraheze.org',
-			'beta' => 'mirabeta.org',
+			'default' => 'wikivy.com',
+			'beta' => 'wikivy.dev',
 		],
 		'wgCreateWikiUseClosedWikis' => [
 			'default' => true,
