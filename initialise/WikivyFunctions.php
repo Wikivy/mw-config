@@ -973,7 +973,7 @@ class WikivyFunctions
 		$databaseLists = [
 			'active' => $databases['active'], 'closed' => $databases['closed'], 'databases' => $databases['databases'],
 			'deleted' => $databases['deleted'], 'inactive' => $databases['inactive'], 'public' => $databases['public'],
-			'private' => $databases['private'],
+			'private' => $databases['private'], $databases['nsfw'],
 		];
 
 		foreach (self::MEDIAWIKI_VERSIONS as $name => $version) {
