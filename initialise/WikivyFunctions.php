@@ -30,7 +30,8 @@ class WikivyFunctions
 	private const ALLOWED_DOMAINS = [
 		'default' => [
 			'wikivy.com'
-		], 'beta' => [
+		],
+		'beta' => [
 			'wikivy.dev'
 		],
 	];

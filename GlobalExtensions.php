@@ -1,0 +1,32 @@
+<?php
+
+wfLoadExtensions([
+	'AbuseFilter',
+	'AntiSpoof',
+	'CentralNotice',
+	'CheckUser',
+	'CreateWiki',
+	'CookieWarning',
+	'ConfirmEdit',
+	'ConfirmEdit/hCaptcha',
+	'DiscordNotifications',
+	'Echo',
+	'EventBus',
+	'EventLogging',
+	'EventStreamConfig',
+	'GlobalBlocking',
+	'GlobalCssJs',
+	'GlobalPreferences',
+	'IPInfo',
+	'LoginNotify',
+	'ManageWiki',
+	'Nuke',
+	'OATHAuth',
+	'OAuth',
+	'ParserFunctions',
+	'RemovePII',
+	'SpamBlacklist',
+	'WikiDiscover',
+	'WikiEditor',
+	'cldr'
+]);
