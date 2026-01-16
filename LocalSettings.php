@@ -902,4 +902,38 @@ $wgConf->settings += [
 		'isvwiki' => 'available',
 	],
 
+	// Echo
+	'wgEchoCrossWikiNotifications' => [
+		'default' => true,
+	],
+	'wgEchoUseJobQueue' => [
+		'default' => true,
+	],
+	'wgEchoSharedTrackingCluster' => [
+		'default' => 'echo',
+		'beta' => 'beta',
+	],
+	'wgEchoSharedTrackingDB' => [
+		'default' => 'metawiki',
+		'beta' => 'metawikibeta',
+	],
+	'wgEchoUseCrossWikiBetaFeature' => [
+		'default' => true,
+	],
+	'wgEchoMentionStatusNotifications' => [
+		'default' => true,
+	],
+	'wgEchoMaxMentionsInEditSummary' => [
+		'default' => 0,
+	],
+	'wgEchoPerUserBlacklist' => [
+		'default' => true,
+	],
+	'wgEchoWatchlistNotifications' => [
+		'default' => false,
+	],
+	'wgEchoWatchlistEmailOncePerPage' => [
+		'default' => true,
+	],
+
 ];
