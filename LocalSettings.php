@@ -1008,6 +1008,9 @@ extract($globals);
 
 $wi->loadExtensions();
 
+require_once __DIR__ . '/ManageWikiNamespaces.php';
+require_once __DIR__ . '/ManageWikiSettings.php';
+
 $wgUploadPath = "//$wmgUploadHostname/$wgDBname";
 $wgUploadDirectory = false;
 
@@ -1017,6 +1020,10 @@ if ( !file_exists( '/srv/mediawiki/cache/' . $wi->version . '/l10n/en.l10n.php' 
 
 // Include other configuration files
 require_once '/srv/mediawiki/config/Database.php';
+
+if ( $wi->missing ) {
+	require_once '/srv/mediawiki/ErrorPages/MissingWiki.php';
+}
 
 // Don't need a global here
 unset( $wi );
