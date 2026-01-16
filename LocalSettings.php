@@ -692,6 +692,9 @@ $wgConf->settings += [
 	'wgSharedTables' => [
 		'default' => [],
 	],
+	'wgDBmwschema' => [
+		'default' => 'public'
+	],
 	'+wgVirtualDomainsMapping' => [
 		'default' => [
 			'virtual-botpasswords' => [
