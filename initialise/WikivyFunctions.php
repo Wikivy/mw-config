@@ -748,26 +748,30 @@ class WikivyFunctions
 			filemtime(__DIR__.'/../ManageWikiExtensions.php'), filemtime(MW_INSTALL_PATH.'/includes/Defines.php'),
 			@filemtime(self::CACHE_DIRECTORY."/$wgDBname.php"));
 
-		static $extensions = null;
-		$extensions ??= self::readFromCache(self::CACHE_DIRECTORY."/$confCacheFileName", 'extensions',
-			$confActualMtime);
+		try {
+			static $extensions = null;
+			$extensions ??= self::readFromCache(self::CACHE_DIRECTORY."/$confCacheFileName", 'extensions',
+				$confActualMtime);
 
-		if ($extensions) {
-			return $extensions;
-		}
+			if ($extensions) {
+				return $extensions;
+			}
 
-		static $cacheArray = null;
-		$cacheArray ??= self::getCacheArray();
-		if ($cacheArray === []) {
+			static $cacheArray = null;
+			$cacheArray ??= self::getCacheArray();
+			if ($cacheArray === []) {
+				return [];
+			}
+
+			$allExtensions = array_filter(array_combine(array_column($wgManageWikiExtensions, 'name'),
+				array_keys($wgManageWikiExtensions)));
+
+			$enabledExtensions = array_keys(array_diff($allExtensions, array_keys(static::$disabledExtensions)));
+
+			return array_values(array_intersect($cacheArray['extensions'] ?? [], $enabledExtensions));
+		} catch (Throwable $e) {
 			return [];
 		}
-
-		$allExtensions = array_filter(array_combine(array_column($wgManageWikiExtensions, 'name'),
-			array_keys($wgManageWikiExtensions)));
-
-		$enabledExtensions = array_keys(array_diff($allExtensions, array_keys(static::$disabledExtensions)));
-
-		return array_values(array_intersect($cacheArray['extensions'] ?? [], $enabledExtensions));
 	}
 
 	public static function handleDisabledExtensions(): void
