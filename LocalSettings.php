@@ -936,4 +936,27 @@ $wgConf->settings += [
 		'default' => true,
 	],
 
+	// JsonConfig
+	'wgJsonConfigEnableLuaSupport' => [
+		'default' => true,
+	],
+	'wgJsonConfigInterwikiPrefix' => [
+		'default' => 'commons',
+		'commonswiki' => 'meta',
+	],
+	'wgJsonConfigModels' => [
+		'default' => [
+			'Map.JsonConfig' => JsonConfig\JCMapDataContent::class,
+			'Tabular.JsonConfig' => JsonConfig\JCTabularContent::class,
+		],
+	],
+
+	// Language
+	'wgLanguageCode' => [
+		'default' => 'en',
+	],
+	'wgUseXssLanguage' => [
+		'beta' => true,
+	],
+
 ];
