@@ -304,6 +304,46 @@ $wgConf->settings += [
 		//'beta' => 'metawikibeta',
 	],
 
+	// CodeMirror
+	'wgCodeMirrorV6' => [
+		'default' => false,
+	],
+
+	// Comments
+	'wgCommentsDefaultAvatar' => [
+		'default' => '/' . $wi->version . '/extensions/SocialProfile/avatars/default_ml.gif',
+	],
+	'wgCommentsInRecentChanges' => [
+		'default' => false,
+	],
+	'wgCommentsSortDescending' => [
+		'default' => false,
+	],
+
+	// CommentStreams
+	'wgCommentStreamsEnableSearch' => [
+		'default' => true,
+	],
+	'wgCommentStreamsNewestStreamsOnTop' => [
+		'default' => false,
+	],
+	'wgCommentStreamsUserAvatarPropertyName' => [
+		'default' => null,
+	],
+	'wgCommentStreamsEnableVoting' => [
+		'default' => false,
+	],
+	'wgCommentStreamsModeratorFastDelete' => [
+		'default' => false,
+	],
+
+	// ConfirmEdit
+	'wgConfirmEditEnabledAbuseFilterCustomActions' => [
+		'default' => [
+			'showcaptcha',
+		],
+	],
+
 	// Cookies
 	'wgCookieExpiration' => [
 		'default' => 30 * 86400,
@@ -319,6 +359,14 @@ $wgConf->settings += [
 	],
 	'wgExtendedLoginCookieExpiration' => [
 		'default' => 365 * 86400,
+	],
+
+	// Create Page
+	'wgCreatePageEditExisting' => [
+		'default' => false,
+	],
+	'wgCreatePageUseVisualEditor' => [
+		'default' => false,
 	],
 
 	// CreateWiki
@@ -464,148 +512,394 @@ $wgConf->settings += [
 				'On hold pending review from another wiki reviewer' => 'On hold pending review from another wiki reviewer or a Steward.',
 			],
 		],
+	],
 
-		'wgCreateWikiDatabaseClusters' => [
-			'default' => [
-				'db01 (c1)' => 'c1',
-			],
-			'beta' => [
-				'db01 (c1)' => 'c1',
-			],
+	'wgCreateWikiDatabaseClusters' => [
+		'default' => [
+			'db01 (c1)' => 'c1',
 		],
-
-		'wgCreateWikiDatabaseSuffix' => [
-			'default' => 'wiki',
-			'beta' => 'wikibeta',
-		],
-		'wgCreateWikiDisableRESTAPI' => [
-			'default' => true,
-			'metawiki' => false,
-			'metawikibeta' => false,
-		],
-		'wgCreateWikiEmailNotifications' => [
-			'default' => true,
-		],
-		'wgCreateWikiEnableManageInactiveWikis' => [
-			'default' => true,
-		],
-
-		'wgCreateWikiSQLFiles' => [
-			'default' => [
-				"$IP/sql/postgres/tables-generated.sql",
-				"$IP/extensions/AbuseFilter/db_patches/postgres/tables-generated.sql",
-				"$IP/extensions/AntiSpoof/sql/postgres/tables-generated.sql",
-				"$IP/extensions/BetaFeatures/sql/tables-generated.sql",
-				"$IP/extensions/CheckUser/schema/postgres/tables-generated.sql",
-				"$IP/extensions/DataDump/sql/data_dump.sql",
-				"$IP/extensions/Echo/sql/postgres/tables-generated.sql",
-				"$IP/extensions/GlobalBlocking/sql/postgres/tables-generated-global_block_whitelist.sql",
-				"$IP/extensions/Linter/sql/postgres/tables-generated.sql",
-				"$IP/extensions/MediaModeration/schema/postgres/tables-generated.sql",
-				"$IP/extensions/OAuth/schema/postgres/tables-generated.sql",
-				//"$IP/extensions/RottenLinks/sql/rottenlinks.sql",
-				"$IP/extensions/UrlShortener/schemas/postgres/tables-generated.sql",
-			],
-		],
-		'wgCreateWikiStateDays' => [
-			'default' => [
-				'inactive' => 60,
-				'closed' => 60,
-				'removed' => 245,
-				'deleted' => 31
-			],
-		],
-		'wgCreateWikiCacheDirectory' => [
-			'default' => '/srv/mediawiki/cache'
-		],
-		'wgCreateWikiCategories' => [
-			'default' => [
-				'Select an option...' => '',
-				'Art & Architecture' => 'artarc',
-				'Automotive' => 'automotive',
-				'Business & Finance' => 'businessfinance',
-				'Community' => 'community',
-				'Education' => 'education',
-				'Electronics' => 'electronics',
-				'Entertainment' => 'entertainment',
-				'Fandom' => 'fandom',
-				'Fantasy' => 'fantasy',
-				'Gaming' => 'gaming',
-				'Geography' => 'geography',
-				'History' => 'history',
-				'Humour/Satire' => 'humour',
-				'Language/Linguistics' => 'langling',
-				'Leisure' => 'leisure',
-				'Literature/Writing' => 'literature',
-				'Media/Journalism' => 'media',
-				'Medicine/Medical' => 'medical',
-				'Military/War' => 'military',
-				'Music' => 'music',
-				'Podcast' => 'podcast',
-				'Politics' => 'politics',
-				'Private' => 'private',
-				'Religion' => 'religion',
-				'Science' => 'science',
-				'Software/Computing' => 'software',
-				'Song Contest' => 'songcontest',
-				'Sports' => 'sport',
-				'Uncategorised' => 'uncategorised',
-			],
-		],
-		'wgCreateWikiInactiveExemptReasonOptions' => [
-			'default' => [
-				'Wiki completed and made to be read' => 'comp',
-				'Wiki made for time-based gathering' => 'tbg',
-				'Wiki made to be read' => 'mtr',
-				'Temporary exemption for exceptional hardship, see DPE' => 'temphardship',
-				'Other, see DPE' => 'other',
-			],
-		],
-		'wgCreateWikiRequestCountWarnThreshold' => [
-			'default' => 5,
-		],
-		'wgCreateWikiSubdomain' => [
-			'default' => 'wikivy.com',
-			'beta' => 'wikivy.dev',
-		],
-		'wgCreateWikiUseClosedWikis' => [
-			'default' => true,
-		],
-		'wgCreateWikiUseEchoNotifications' => [
-			'default' => true,
-		],
-		'wgCreateWikiUseExperimental' => [
-			'default' => true,
-		],
-		'wgCreateWikiUseInactiveWikis' => [
-			'default' => true,
-		],
-		'wgCreateWikiUsePrivateWikis' => [
-			'default' => true,
-		],
-		'wgCreateWikiContainers' => [
-			'default' => [
-				'avatars' => 'public-private',
-				'awards' => 'public-private',
-				'local-public' => 'public-private',
-				'local-thumb' => 'public-private',
-				'local-transcoded' => 'public-private',
-				'local-temp' => 'private',
-				'local-deleted' => 'private',
-				'dumps-backup' => 'public-private',
-				'phonos-render' => 'public-private',
-				'timeline-render' => 'public-private',
-				'upv2avatars' => 'public-private',
-			],
-		],
-		'wgCreateWikiUseJobQueue' => [
-			'default' => true,
-		],
-		'wgRequestWikiMinimumLength' => [
-			'default' => 350,
-		],
-		'wgRequestWikiConfirmAgreement' => [
-			'default' => true,
+		'beta' => [
+			'db01 (c1)' => 'c1',
 		],
 	],
+
+	'wgCreateWikiDatabaseSuffix' => [
+		'default' => 'wiki',
+		'beta' => 'wikibeta',
+	],
+	'wgCreateWikiDisableRESTAPI' => [
+		'default' => true,
+		'metawiki' => false,
+		'metawikibeta' => false,
+	],
+	'wgCreateWikiEmailNotifications' => [
+		'default' => true,
+	],
+	'wgCreateWikiEnableManageInactiveWikis' => [
+		'default' => true,
+	],
+	'wgCreateWikiSQLFiles' => [
+		'default' => [
+			"$IP/sql/postgres/tables-generated.sql",
+			"$IP/extensions/AbuseFilter/db_patches/postgres/tables-generated.sql",
+			"$IP/extensions/AntiSpoof/sql/postgres/tables-generated.sql",
+			"$IP/extensions/BetaFeatures/sql/tables-generated.sql",
+			"$IP/extensions/CheckUser/schema/postgres/tables-generated.sql",
+			"$IP/extensions/DataDump/sql/data_dump.sql",
+			"$IP/extensions/Echo/sql/postgres/tables-generated.sql",
+			"$IP/extensions/GlobalBlocking/sql/postgres/tables-generated-global_block_whitelist.sql",
+			"$IP/extensions/Linter/sql/postgres/tables-generated.sql",
+			"$IP/extensions/MediaModeration/schema/postgres/tables-generated.sql",
+			"$IP/extensions/OAuth/schema/postgres/tables-generated.sql",
+			"$IP/extensions/RottenLinks/sql/rottenlinks.sql",
+			"$IP/extensions/UrlShortener/schemas/postgres/tables-generated.sql",
+		],
+	],
+	'wgCreateWikiStateDays' => [
+		'default' => [
+			'inactive' => 60,
+			'closed' => 60,
+			'removed' => 245,
+			'deleted' => 31
+		],
+	],
+	'wgCreateWikiCacheDirectory' => [
+		'default' => '/srv/mediawiki/cache'
+	],
+	'wgCreateWikiCategories' => [
+		'default' => [
+			'Select an option...' => '',
+			'Art & Architecture' => 'artarc',
+			'Automotive' => 'automotive',
+			'Business & Finance' => 'businessfinance',
+			'Community' => 'community',
+			'Education' => 'education',
+			'Electronics' => 'electronics',
+			'Entertainment' => 'entertainment',
+			'Fandom' => 'fandom',
+			'Fantasy' => 'fantasy',
+			'Gaming' => 'gaming',
+			'Geography' => 'geography',
+			'History' => 'history',
+			'Humour/Satire' => 'humour',
+			'Language/Linguistics' => 'langling',
+			'Leisure' => 'leisure',
+			'Literature/Writing' => 'literature',
+			'Media/Journalism' => 'media',
+			'Medicine/Medical' => 'medical',
+			'Military/War' => 'military',
+			'Music' => 'music',
+			'Podcast' => 'podcast',
+			'Politics' => 'politics',
+			'Private' => 'private',
+			'Religion' => 'religion',
+			'Science' => 'science',
+			'Software/Computing' => 'software',
+			'Song Contest' => 'songcontest',
+			'Sports' => 'sport',
+			'Uncategorised' => 'uncategorised',
+		],
+	],
+	'wgCreateWikiInactiveExemptReasonOptions' => [
+		'default' => [
+			'Wiki completed and made to be read' => 'comp',
+			'Wiki made for time-based gathering' => 'tbg',
+			'Wiki made to be read' => 'mtr',
+			'Temporary exemption for exceptional hardship, see DPE' => 'temphardship',
+			'Other, see DPE' => 'other',
+		],
+	],
+	'wgCreateWikiRequestCountWarnThreshold' => [
+		'default' => 5,
+	],
+	'wgCreateWikiSubdomain' => [
+		'default' => 'wikivy.com',
+		'beta' => 'wikivy.dev',
+	],
+	'wgCreateWikiUseClosedWikis' => [
+		'default' => true,
+	],
+	'wgCreateWikiUseEchoNotifications' => [
+		'default' => true,
+	],
+	'wgCreateWikiUseExperimental' => [
+		'default' => true,
+	],
+	'wgCreateWikiUseInactiveWikis' => [
+		'default' => true,
+	],
+	'wgCreateWikiUsePrivateWikis' => [
+		'default' => true,
+	],
+	'wgCreateWikiContainers' => [
+		'default' => [
+			'avatars' => 'public-private',
+			'awards' => 'public-private',
+			'local-public' => 'public-private',
+			'local-thumb' => 'public-private',
+			'local-transcoded' => 'public-private',
+			'local-temp' => 'private',
+			'local-deleted' => 'private',
+			'dumps-backup' => 'public-private',
+			'phonos-render' => 'public-private',
+			'timeline-render' => 'public-private',
+			'upv2avatars' => 'public-private',
+		],
+	],
+	'wgCreateWikiUseJobQueue' => [
+		'default' => true,
+	],
+	'wgRequestWikiMinimumLength' => [
+		'default' => 350,
+	],
+	'wgRequestWikiConfirmAgreement' => [
+		'default' => true,
+	],
+
+	// CookieWarning
+	'wgCookieWarningMoreUrl' => [
+		'default' => 'https://meta.wikivy.com/wiki/Special:MyLanguage/Privacy_Policy#2._Cookies',
+	],
+	'wgCookieWarningEnabled' => [
+		'default' => true,
+	],
+	'wgCookieWarningGeoIPLookup' => [
+		'default' => 'php',
+	],
+	'wgCookieWarningGeoIp2' => [
+		'default' => true,
+	],
+	'wgCookieWarningGeoIp2Path' => [
+		'default' => '/srv/GeoLite2-City.mmdb',
+	],
+
+	// Database
+	'wgAllowSchemaUpdates' => [
+		'default' => false,
+	],
+	'wgDBadminuser' => [
+		'default' => 'wikivy',
+	],
+	'wgDBuser' => [
+		'default' => 'wikivy',
+	],
+	'wgReadOnly' => [
+		'default' => false,
+	],
+	'wgSharedDB' => [
+		'default' => null,
+	],
+	'wgSharedTables' => [
+		'default' => [],
+	],
+	'+wgVirtualDomainsMapping' => [
+		'default' => [
+			'virtual-botpasswords' => [
+				'db' => $wi->getGlobalDatabase(),
+			],
+			'virtual-centralauth' => [
+				'db' => $wi->getGlobalDatabase(),
+			],
+			'virtual-centralnotice' => [
+				'db' => $wi->getCentralDatabase(),
+			],
+			'virtual-checkuser-global' => [
+				'db' => $wi->getGlobalDatabase(),
+			],
+			'virtual-createwiki-central' => [
+				'db' => $wi->getCentralDatabase(),
+			],
+			'virtual-globalblocking' => [
+				'db' => $wi->getGlobalDatabase(),
+			],
+			'virtual-globaljsonlinks' => [
+				'db' => 'commonswiki',
+			],
+			'virtual-globalnewfiles' => [
+				'db' => $wi->getGlobalDatabase(),
+			],
+			'virtual-importdump' => [
+				'db' => $wi->getCentralDatabase(),
+			],
+			'virtual-incidentreporting' => [
+				'db' => $wi->getIncidentsDatabase(),
+			],
+			'virtual-interwiki' => [
+				'db' => $wi->getCentralDatabase(),
+			],
+			'virtual-LoginNotify' => [
+				'db' => $wi->getGlobalDatabase(),
+			],
+			'virtual-managewiki-central' => [
+				'db' => $wi->getCentralDatabase(),
+			],
+			'virtual-matomoanalytics' => [
+				'db' => $wi->getGlobalDatabase(),
+			],
+			'virtual-oathauth' => [
+				'db' => $wi->getGlobalDatabase(),
+			],
+			'virtual-requestcustomdomain' => [
+				'db' => $wi->getCentralDatabase(),
+			],
+		],
+		'+beta' => [
+			'virtual-botpasswords' => [
+				'db' => 'metawikibeta',
+			],
+			'virtual-globaljsonlinks' => [
+				'db' => 'commonswikibeta',
+			],
+		]
+	],
+
+	// DiscordNotifications
+	'wgDiscordAvatarUrl' => [
+		'default' => '',
+	],
+	'wgDiscordFromName' => [
+		'default' => $wi->sitename,
+	],
+	'wgDiscordIgnoreMinorEdits' => [
+		'default' => false,
+	],
+	'wgDiscordIncludePageUrls' => [
+		'default' => true,
+	],
+	'wgDiscordIncludeUserUrls' => [
+		'default' => true,
+	],
+	'wgDiscordIncludeDiffSize' => [
+		'default' => true,
+	],
+	'wgDiscordNotificationEnabledActions' => [
+		'default' => [
+			'AddedArticle' => true,
+			'EditedArticle' => true,
+			'MovedArticle' => true,
+			'ProtectedArticle' => true,
+			'RemovedArticle' => true,
+			'UnremovedArticle' => true,
+			'AfterImportPage' => true,
+			'FileUpload' => true,
+			'BlockedUser' => true,
+			'NewUser' => true,
+			'UserGroupsChanged' => true,
+			'ModerationPending' => true,
+		],
+	],
+	'wgDiscordNotificationShowImage' => [
+		'default' => true,
+	],
+	'wgDiscordNotificationShowSuppressed' => [
+		'default' => false,
+	],
+	'wgDiscordNotificationCentralAuthWikiUrl' => [
+		'default' => 'https://meta.wikivy.com/',
+	],
+	'wgDiscordNotificationIncludeAutocreatedUsers' => [
+		'default' => true,
+		'commonswiki' => false,
+		'devwiki' => false,
+		'loginwiki' => false,
+		'metawiki' => false,
+		'testwiki' => false,
+	],
+	'wgDiscordAdditionalIncomingWebhookUrls' => [
+		'default' => [],
+	],
+	'wgDiscordDisableEmbedFooter' => [
+		'default' => false,
+	],
+	'wgDiscordExcludeConditions' => [
+		'default' => [
+			'experimental' => [
+				'article_inserted' => [
+					'groups' => [
+						'sysop',
+					],
+					'permissions' => [
+						'bot',
+						'managewiki-core',
+						'managewiki-extensions',
+						'managewiki-namespaces',
+						'managewiki-permissions',
+						'managewiki-settings',
+					],
+				],
+				'article_saved' => [
+					'groups' => [
+						'sysop',
+					],
+					'permissions' => [
+						'bot',
+						'managewiki-core',
+						'managewiki-extensions',
+						'managewiki-namespaces',
+						'managewiki-permissions',
+						'managewiki-settings',
+					],
+				],
+			],
+			'users' => [
+				// Exclude excessive bots from all feeds
+				'Creaturawikibot',
+				'FuzzyBot',
+				'HispanoBOT',
+			],
+		],
+		'+commonswiki' => [
+			'groups' => [
+				'bot',
+			],
+		],
+		'+devwiki' => [
+			'groups' => [
+				'bot',
+			],
+		],
+		'+metawiki' => [
+			'article_inserted' => [
+				'groups' => [
+					'bot',
+					'flood',
+				],
+			],
+			'article_saved' => [
+				'groups' => [
+					'bot',
+					'flood',
+				],
+			],
+		],
+		'+testwiki' => [
+			'groups' => [
+				'bot',
+			],
+		],
+	],
+	'wgDiscordEnableExperimentalCVTFeatures' => [
+		'default' => true,
+	],
+	'wgDiscordExperimentalCVTMatchFilter' => [
+		'default' => [ '(n[1i!*]gg[3*e]r|r[e3*]t[4@*a]rd|f[@*4]gg[0*o]t|ch[1!i*]nk)' ],
+	],
+	'wgDiscordExperimentalFeedLanguageCode' => [
+		'default' => 'en',
+	],
+
+	// DiscussionTools
+	'wgDiscussionTools_visualenhancements' => [
+		'default' => 'default',
+		'isvwiki' => 'available',
+	],
+	'wgDiscussionTools_visualenhancements_reply' => [
+		'default' => 'default',
+		'isvwiki' => 'available',
+	],
+	'wgDiscussionTools_visualenhancements_pageframe' => [
+		'default' => 'default',
+		'isvwiki' => 'available',
+	],
+
 ];
