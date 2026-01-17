@@ -1453,6 +1453,24 @@ $wgConf->settings += [
 		'default' => true,
 	],
 
+	// Resources
+	'wgExtensionAssetsPath' => [
+		'default' => '/' . $wi->version . '/extensions',
+	],
+	'wgLocalStylePath' => [
+		'default' => '/' . $wi->version . '/skins',
+	],
+	'wgResourceBasePath' => [
+		'default' => '/' . $wi->version,
+	],
+	'wgResourceLoaderMaxQueryLength' => [
+		'default' => 5000,
+	],
+	'wgStylePath' => [
+		'default' => '/' . $wi->version . '/skins',
+	],
+
+
 	// Varnish
 	'wgUseCdn' => [
 		'default' => true,
