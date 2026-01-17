@@ -31,6 +31,7 @@ wfLoadExtensions([
 	'SpamBlacklist',
 	'WikiDiscover',
 	'WikiEditor',
+	'WikivyMagic',
 	'cldr'
 ]);
 
