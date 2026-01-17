@@ -1001,7 +1001,7 @@ class WikivyFunctions
 		asort($versions);
 
 		$formDescriptor['primary-domain'] = [
-			'label-message' => 'miraheze-label-managewiki-primary-domain', 'type' => 'select',
+			'label-message' => 'wikivy-label-managewiki-primary-domain', 'type' => 'select',
 			'options' => array_combine(self::ALLOWED_DOMAINS[self::getRealm($dbname)],
 				self::ALLOWED_DOMAINS[self::getRealm($dbname)]), 'default' => self::getPrimaryDomain($dbname),
 			'disabled' => !$context->getAuthority()->isAllowed('managewiki-restricted'),
@@ -1011,23 +1011,23 @@ class WikivyFunctions
 		$mwSettings = $moduleFactory->settings($dbname);
 		$setList = $mwSettings->listAll();
 		$formDescriptor['article-path'] = [
-			'label-message' => 'miraheze-label-managewiki-article-path', 'type' => 'select', 'options-messages' => [
-				'miraheze-label-managewiki-article-path-wiki' => '/wiki/$1',
-				'miraheze-label-managewiki-article-path-root' => '/$1',
+			'label-message' => 'wikivy-label-managewiki-article-path', 'type' => 'select', 'options-messages' => [
+				'wikivy-label-managewiki-article-path-wiki' => '/wiki/$1',
+				'wikivy-label-managewiki-article-path-root' => '/$1',
 			], 'default' => $setList['wgArticlePath'] ?? '/wiki/$1',
 			'disabled' => !$context->getAuthority()->isAllowed('managewiki-restricted'),
 			'cssclass' => 'ext-managewiki-infuse', 'section' => 'main',
 		];
 
 		$formDescriptor['mainpage-is-domain-root'] = [
-			'label-message' => 'miraheze-label-managewiki-mainpage-is-domain-root', 'type' => 'check',
+			'label-message' => 'wikivy-label-managewiki-mainpage-is-domain-root', 'type' => 'check',
 			'default' => $setList['wgMainPageIsDomainRoot'] ?? false,
 			'disabled' => !$context->getAuthority()->isAllowed('managewiki-restricted'),
 			'cssclass' => 'ext-managewiki-infuse', 'section' => 'main',
 		];
 
 		$formDescriptor['mediawiki-version'] = [
-			'label-message' => 'miraheze-label-managewiki-mediawiki-version', 'type' => 'select',
+			'label-message' => 'wikivy-label-managewiki-mediawiki-version', 'type' => 'select',
 			'options' => array_combine($versions, $versions), 'default' => $mwVersion,
 			'disabled' => !$context->getAuthority()->isAllowed('managewiki-restricted'),
 			'cssclass' => 'ext-managewiki-infuse', 'section' => 'main',
@@ -1092,7 +1092,10 @@ class WikivyFunctions
 		$settings = $GLOBALS['wgConf']->settings;
 		foreach ($GLOBALS['globals'] as $global => $value) {
 			if (
-				!isset($settings["+$global"]) && $global !== 'wgManageWikiPermissionsAdditionalRights'
+				!isset($settings["+$global"]) &&
+				$global !== 'wgArticlePath' &&
+				$global !== 'wgServer' &&
+				$global !== 'wgManageWikiPermissionsAdditionalRights'
 			) {
 				$GLOBALS[$global] = $value;
 			}
