@@ -1491,6 +1491,19 @@ $wgConf->settings += [
 		'default' => 432000,
 	],
 
+	// Uploads
+	'wmgEnableSharedUploads' => [
+		'default' => false,
+	],
+	'wmgSharedUploadBaseUrl' => [
+		'default' => false,
+	],
+	'wmgSharedUploadDBname' => [
+		'default' => false,
+	],
+	'wmgSharedUploadClientDBname' => [
+		'default' => false,
+	],
 ];
 
 // ManageWiki settings
