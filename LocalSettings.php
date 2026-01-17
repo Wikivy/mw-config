@@ -939,6 +939,35 @@ $wgConf->settings += [
 		'default' => true,
 	],
 
+	// GlobalCssJs
+	'wgGlobalCssJsConfig' => [
+		'default' => [
+			'wiki' => 'metawiki',
+			'source' => 'metawiki',
+		],
+		'beta' => [
+			'wiki' => 'metawikibeta',
+			'source' => 'metawikibeta',
+		],
+	],
+	'+wgResourceLoaderSources' => [
+		'default' => [
+			'metawiki' => [
+				'apiScript' => '//meta.wikivy.com/w/api.php',
+				'loadScript' => '//meta.wikivy.com/w/load.php',
+			],
+		],
+		'beta' => [
+			'metawikibeta' => [
+				'apiScript' => '//meta.wikivy.com/w/api.php',
+				'loadScript' => '//meta.wikivy.com/w/load.php',
+			],
+		],
+	],
+	'wgUseGlobalSiteCssJs' => [
+		'default' => false,
+	],
+
 	// JsonConfig
 	'wgJsonConfigEnableLuaSupport' => [
 		'default' => true,
