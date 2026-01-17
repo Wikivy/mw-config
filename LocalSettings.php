@@ -1471,6 +1471,83 @@ $wgConf->settings += [
 	],
 
 
+	// Server
+	'wgArticlePath' => [
+		'default' => '/wiki/$1',
+	],
+	'wgDisableOutputCompression' => [
+		'default' => true,
+	],
+	'wgScriptPath' => [
+		'default' => '/w',
+	],
+	'wgShowHostnames' => [
+		'default' => true,
+	],
+	'wgThumbPath' => [
+		'default' => '/w/thumb_handler.php'
+	],
+	'wgUsePathInfo' => [
+		'default' => true,
+	],
+
+	// Styling
+	'wgAllowUserCss' => [
+		'default' => true,
+	],
+	'wgAllowUserJs' => [
+		'default' => true,
+	],
+	'wgAppleTouchIcon' => [
+		'default' => '/apple-touch-icon.png',
+	],
+	'wgCentralAuthLoginIcon' => [
+		'default' => '/srv/mediawiki/favicons/default.ico',
+	],
+	'wgDefaultSkin' => [
+		'default' => 'vector-2022',
+	],
+	'wgFallbackSkin' => [
+		'default' => 'vector-2022',
+	],
+	'wgFavicon' => [
+		'default' => '/favicon.ico',
+	],
+	'wgIcon' => [
+		'default' => false,
+	],
+	'wgWordmark' => [
+		'default' => false,
+	],
+	'wgWordmarkHeight' => [
+		'default' => 18,
+	],
+	'wgWordmarkWidth' => [
+		'default' => 116,
+	],
+	'wgMaxTocLevel' => [
+		'default' => 999,
+	],
+
+	// Theme
+	'wgDefaultTheme' => [
+		'default' => '',
+	],
+
+	// Uploads
+	'wmgEnableSharedUploads' => [
+		'default' => false,
+	],
+	'wmgSharedUploadBaseUrl' => [
+		'default' => false,
+	],
+	'wmgSharedUploadDBname' => [
+		'default' => false,
+	],
+	'wmgSharedUploadClientDBname' => [
+		'default' => false,
+	],
+
 	// Varnish
 	'wgUseCdn' => [
 		'default' => true,
@@ -1507,20 +1584,6 @@ $wgConf->settings += [
 	],
 	'wgCdnMaxAge' => [
 		'default' => 432000,
-	],
-
-	// Uploads
-	'wmgEnableSharedUploads' => [
-		'default' => false,
-	],
-	'wmgSharedUploadBaseUrl' => [
-		'default' => false,
-	],
-	'wmgSharedUploadDBname' => [
-		'default' => false,
-	],
-	'wmgSharedUploadClientDBname' => [
-		'default' => false,
 	],
 
 	// CreateWiki Defined Special Variables
