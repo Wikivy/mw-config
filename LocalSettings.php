@@ -631,7 +631,7 @@ $wgConf->settings += [
 	'wgCreateWikiUsePrivateWikis' => [
 		'default' => true,
 	],
-	'wgCreateWikiContainers' => [
+	/*'wgCreateWikiContainers' => [
 		'default' => [
 			'avatars' => 'public-private',
 			'awards' => 'public-private',
@@ -645,7 +645,7 @@ $wgConf->settings += [
 			'timeline-render' => 'public-private',
 			'upv2avatars' => 'public-private',
 		],
-	],
+	],*/
 	'wgCreateWikiUseJobQueue' => [
 		'default' => true,
 	],
