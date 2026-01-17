@@ -157,57 +157,45 @@ $wgConf->settings += [
 			'metawikibeta',
 		],
 	],
-
 	'wgCentralAuthAutoMigrate' => [
 		'default' => true,
 	],
-
 	'wgCentralAuthAutoMigrateNonGlobalAccounts' => [
 		'default' => true,
 	],
-
 	'wgCentralAuthCookies' => [
 		'default' => true,
 	],
-
 	'wgCentralAuthCookiePrefix' => [
 		'default' => 'centralauth_',
 		'beta' => 'betacentralauth_',
 	],
-
 	'wgCentralAuthEnableGlobalRenameRequest' => [
 		'default' => true,
 	],
-
 	'wgCentralAuthGlobalBlockInterwikiPrefix' => [
 		'default' => 'meta',
 	],
-
 	'wgCentralAuthLoginWiki' => [
 		'default' => 'loginwiki',
 		'beta' => 'loginwikibeta',
 	],
-
 	'wgCentralAuthOldNameAntiSpoofWiki' => [
 		'default' => 'metawiki',
 		'beta' => 'metawikibeta',
 	],
-
 	'wgCentralAuthPreventUnattached' => [
 		'default' => true,
 	],
-
 	'wmgCentralAuthAutoLoginWikis' => [
 		'default' => [
 			'.wikivy.com' => 'metawiki'
 		],
 	],
-
 	'wgGlobalRenameDenylist' => [
 		'default' => 'https://meta.wikivy.com/wiki/MediaWiki:Global_rename_blacklist?action=raw',
 		'beta' => 'https://meta.wikivy.dev/wiki/MediaWiki:Global_rename_blacklist?action=raw',
 	],
-
 	'wgGlobalRenameDenylistRegex' => [
 		'default' => true,
 	],
