@@ -878,7 +878,7 @@ class WikivyFunctions
 		$dbr = self::getDatabaseConnection($globalDatabase);
 		$allWikis = $dbr->newSelectQueryBuilder()->table('cw_wikis')->fields([
 				'wiki_dbcluster', 'wiki_dbname', 'wiki_url', 'wiki_sitename', 'wiki_deleted', 'wiki_closed',
-				'wiki_inactive', 'wiki_private', 'wiki_nsfw', 'wiki_extra',
+				'wiki_inactive', 'wiki_private', 'wiki_extra',
 			])->caller(__METHOD__)->fetchResultSet();
 
 		$activeList = [];
@@ -950,7 +950,7 @@ class WikivyFunctions
 				];
 			}
 
-			if ((int) $wiki->wiki_nsfw === 1) {
+			/*if ((int) $wiki->wiki_nsfw === 1) {
 				$nsfwList[$wiki->wiki_dbname] = [
 					's' => $wiki->wiki_sitename,
 					'c' => $wiki->wiki_dbcluster,
@@ -960,12 +960,12 @@ class WikivyFunctions
 					's' => $wiki->wiki_sitename,
 					'c' => $wiki->wiki_dbcluster,
 				];
-			}
+			}*/
 		}
 
 		return [
 			'active' => $activeList, 'closed' => $closedList, 'databases' => $combiList, 'deleted' => $deletedList,
-			'inactive' => $inactiveList, 'public' => $publicList, 'private' => $privateList, 'nsfw' => $nsfwList, 'versions' => $versions,
+			'inactive' => $inactiveList, 'public' => $publicList, 'private' => $privateList, 'versions' => $versions,
 		];
 	}
 
@@ -977,7 +977,7 @@ class WikivyFunctions
 		$databaseLists = [
 			'active' => $databases['active'], 'closed' => $databases['closed'], 'databases' => $databases['databases'],
 			'deleted' => $databases['deleted'], 'inactive' => $databases['inactive'], 'public' => $databases['public'],
-			'private' => $databases['private'], $databases['nsfw'],
+			'private' => $databases['private'],
 		];
 
 		foreach (self::MEDIAWIKI_VERSIONS as $name => $version) {

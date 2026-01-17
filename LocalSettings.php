@@ -1504,6 +1504,31 @@ $wgConf->settings += [
 	'wmgSharedUploadClientDBname' => [
 		'default' => false,
 	],
+
+	// CreateWiki Defined Special Variables
+	'cwClosed' => [
+		'default' => false,
+	],
+	'cwDeleted' => [
+		'default' => false,
+	],
+	'cwExperimental' => [
+		'default' => false,
+	],
+	'cwInactive' => [
+		'default' => false,
+	],
+	'cwPrivate' => [
+		'default' => false,
+	],
+
+	// Meta namespace
+	'wgMetaNamespace' => [
+		'default' => str_replace( [ ' ', ':' ], '_', $wi->sitename ),
+	],
+	'wgMetaNamespaceTalk' => [
+		'default' => str_replace( [ ' ', ':' ], '_', "{$wi->sitename}_talk" ),
+	],
 ];
 
 // ManageWiki settings
@@ -1521,9 +1546,21 @@ require_once __DIR__ . '/ManageWikiSettings.php';
 $wgUploadPath = "//$wmgUploadHostname/$wgDBname";
 $wgUploadDirectory = false;
 
+// These are not loaded by mergeMessageFileList.php due to not being on ExtensionRegistry
+$wgMessagesDirs['SocialProfile'] = $IP . '/extensions/SocialProfile/i18n';
+$wgExtensionMessagesFiles['SocialProfileAlias'] = $IP . '/extensions/SocialProfile/SocialProfile.alias.php';
+$wgMessagesDirs['SocialProfileUserProfile'] = $IP . '/extensions/SocialProfile/UserProfile/i18n';
+$wgExtensionMessagesFiles['SocialProfileNamespaces'] = $IP . '/extensions/SocialProfile/SocialProfile.namespaces.php';
+$wgExtensionMessagesFiles['AvatarMagic'] = $IP . '/extensions/SocialProfile/UserProfile/includes/avatar/Avatar.i18n.magic.php';
+
+$wgLocalisationCacheConf['storeClass'] = LCStoreStaticArray::class;
+$wgLocalisationCacheConf['storeDirectory'] = '/srv/mediawiki/cache/' . $wi->version . '/l10n';
+$wgLocalisationCacheConf['manualRecache'] = true;
+
 if ( !file_exists( '/srv/mediawiki/cache/' . $wi->version . '/l10n/en.l10n.php' ) ) {
 	$wgLocalisationCacheConf['manualRecache'] = false;
 }
+
 
 // Include other configuration files
 require_once '/srv/mediawiki/config/Database.php';
@@ -1531,6 +1568,22 @@ require_once '/srv/mediawiki/config/Database.php';
 if ( $wi->missing ) {
 	require_once '/srv/mediawiki/ErrorPages/MissingWiki.php';
 }
+
+if ( $cwDeleted ) {
+	if ( MW_ENTRY_POINT === 'cli' ) {
+		wfHandleDeletedWiki();
+	} else {
+		$wgHooks['ApiBeforeMain'][] = 'wfHandleDeletedWiki';
+		$wgHooks['BeforeInitialize'][] = 'wfHandleDeletedWiki';
+	}
+}
+
+function wfHandleDeletedWiki() {
+	require_once '/srv/mediawiki/ErrorPages/DeletedWiki.php';
+}
+
+// Define last to avoid all dependencies
+require_once '/srv/mediawiki/config/GlobalSettings.php';
 
 // Don't need a global here
 unset( $wi );
