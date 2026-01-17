@@ -26,9 +26,9 @@ if ( $wi->dbname !== 'ldapwikiwiki' ) {
 
 	$wgCentralAuthAutoLoginWikis = $wmgCentralAuthAutoLoginWikis;
 
-	if ( isset( $wgAuthManagerAutoConfig['primaryauth'][LocalPasswordPrimaryAuthenticationProvider::class] ) ) {
+	/*if ( isset( $wgAuthManagerAutoConfig['primaryauth'][LocalPasswordPrimaryAuthenticationProvider::class] ) ) {
 		$wgAuthManagerAutoConfig['primaryauth'][LocalPasswordPrimaryAuthenticationProvider::class]['args'][0]['loginOnly'] = true;
-	}
+	}*/
 
 	$wgPasswordConfig['null'] = [ 'class' => InvalidPassword::class ];
 
