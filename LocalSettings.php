@@ -998,6 +998,87 @@ $wgConf->settings += [
 	'wgUseGlobalSiteCssJs' => [
 		'default' => false,
 	],
+	
+	// Grant Permissions for BotPasswords and OAuth
+	'+wgGrantPermissions' => [
+		'default' => [
+			'basic' => [
+				'user' => true,
+			],
+			'usedatadumpapi' => [
+				'view-dump' => true,
+				'generate-dump' => true,
+				'delete-dump' => true,
+			],
+		],
+	],
+	'+wgGrantPermissionGroups' => [
+		'default' => [],
+	],
+
+	// Interwiki
+	'wgEnableScaryTranscluding' => [
+		'default' => true,
+	],
+	'wgExtraInterlanguageLinkPrefixes' => [
+		'default' => [
+			'simple',
+		],
+	],
+	'wgExtraLanguageNames' => [
+		'default' => [
+			// Prevent mh from being treated as an interlanguage link (T11615)
+			'wv' => '',
+		]
+	],
+
+	// InterwikiDispatcher
+	'wgIWDPrefixes' => [
+		'default' => [
+			'fandom' => [
+				/** Fandom */
+				'interwiki' => 'fandom',
+				'url' => 'https://$2.fandom.com/wiki/$1',
+				'urlInt' => 'https://$2.fandom.com/$3/wiki/$1',
+				'baseTransOnly' => true,
+			],
+			'miraheze' => [
+				/** Miraheze */
+				'interwiki' => 'mh',
+				'url' => 'https://$2.miraheze.org/wiki/$1',
+				'dbname' => '$2wiki',
+				'baseTransOnly' => true,
+			],
+			'wikitide' => [
+				/** WikiTide */
+				'interwiki' => 'wt',
+				'url' => 'https://$2.wikitide.org/wiki/$1',
+				'dbname' => '$2wiki',
+				'baseTransOnly' => true,
+			],
+			'wikioasis' => [
+				/** WikiOasis */
+				'interwiki' => 'wo',
+				'url' => 'https://$2.wikioasis.org/wiki/$1',
+				'dbname' => '$2wiki',
+				'baseTransOnly' => true,
+			],
+			'wikivy' => [
+				/** Wikivy */
+				'interwiki' => 'wv',
+				'url' => 'https://$2.wikivy.com/wiki/$1',
+				'dbname' => '$2wiki',
+				'baseTransOnly' => true,
+			],
+			'wiki_gg' => [
+				/** Wiki.gg */
+				'interwiki' => 'wgg',
+				'url' => 'https://$2.wiki.gg/wiki/$1',
+				'urlInt' => 'https://$2.wiki.gg/$3/wiki/$1',
+				'baseTransOnly' => true,
+			],
+		],
+	],
 
 	// JsonConfig
 	'wgJsonConfigEnableLuaSupport' => [
