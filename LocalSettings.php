@@ -72,7 +72,7 @@ $wgConf->settings += [
 
 	'wgPrivilegedGroups' => [
 		'default' => [ 'bureaucrat', 'checkuser', 'interface-admin', 'suppress', 'sysop' ],
-		'+metawiki' => [ 'steward', 'techteam', 'safetyteam' ],
+		'+metawiki' => [ 'steward', 'techteam' ],
 	],
 
 	// AbuseFilter
