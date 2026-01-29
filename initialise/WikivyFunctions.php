@@ -50,6 +50,11 @@ class WikivyFunctions
 		'beta' => 'wikivy.dev',
 	];
 
+	private const SHARED_DOMAIN = [
+		'default' => 'auth.wikivy.com',
+		'beta' => 'auth.wikivy.dev',
+	];
+
 	private const GLOBAL_DATABASE = [
 		'default' => 'wvglobal',
 		'beta' => 'betaglobal',
@@ -296,6 +301,18 @@ class WikivyFunctions
 		}
 
 		$hostname = $_SERVER['HTTP_HOST'] ?? 'undefined';
+		if ( $hostname === 'auth.wikivy.com' || $hostname === 'auth.wikivy.dev' ) {
+			$requestUri = $_SERVER['REQUEST_URI'];
+			$pathBits = explode( '/', $requestUri, 3 );
+			if ( count( $pathBits ) < 3 ) {
+				trigger_error( "Invalid request URI (requestUri=" . $requestUri . "), can't determine language.\n", E_USER_ERROR );
+				exit( 1 );
+			}
+			[ , $dbname, ] = $pathBits;
+			// No validation of $dbname at this point - if it's invalid, an error will be produced
+			return $dbname;
+		}
+
 
 		static $database = null;
 		$database ??= self::readDbListFile('databases', true, 'https://'.$hostname, true);
@@ -385,6 +402,10 @@ class WikivyFunctions
 		$primaryDomain = self::readDbListFile('databases', false, $database)['d'] ?? null;
 
 		return $primaryDomain ?? self::DEFAULT_SERVER[self::getRealm($database)];
+	}
+
+	public function getSharedDomain(): string {
+		return self::SHARED_DOMAIN[$this->realm];
 	}
 
 	public static function getDefaultServer(?string $database = null): string

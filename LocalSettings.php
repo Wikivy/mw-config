@@ -14,6 +14,9 @@ if ( PHP_SAPI !== 'cli' ) {
 
 setlocale( LC_ALL, 'en_US.UTF-8' );
 
+// Show custom database maintenance error page on these clusters.
+$wgDatabaseClustersMaintenance = [];
+
 require_once '/srv/mediawiki/config/initialise/WikivyFunctions.php';
 $wi = new WikivyFunctions();
 
@@ -27,10 +30,40 @@ require_once '/srv/mediawiki/config/GlobalSkins.php';
 $wgPasswordSender = 'noreply@wikivy.com';
 $wmgUploadHostname = 'static.wikivy.com';
 
+$wmgSharedDomainPathPrefix = '';
+
+$wgScriptPath = '/w';
+$wgLoadScript = "$wgScriptPath/load.php";
+
+if ( ( $_SERVER['HTTP_HOST'] ?? '' ) === $wi->getSharedDomain()
+	|| getenv( 'MW_USE_SHARED_DOMAIN' )
+) {
+	if ( $wi->dbname === 'ldapwikiwiki' ) {
+		print "Can only be used for SUL wikis\n";
+		exit( 1 );
+	}
+
+	$wgLoadScript = "{$wi->server}$wgScriptPath/load.php";
+	$wmgSharedDomainPathPrefix = "/$wgDBname";
+
+	$wgCanonicalServer = 'https://' . $wi->getSharedDomain();
+
+	$wgUseSiteCss = false;
+	$wgUseSiteJs = false;
+}
+
+$wgScriptPath  = "$wmgSharedDomainPathPrefix/w";
+$wgScript = "$wgScriptPath/index.php";
+
+$wgResourceBasePath = "$wmgSharedDomainPathPrefix/{$wi->version}";
+$wgExtensionAssetsPath = "$wgResourceBasePath/extensions";
+$wgStylePath = "$wgResourceBasePath/skins";
+$wgLocalStylePath = $wgStylePath;
+
 $wgConf->settings += [
 	// Invalidates user sessions - do not change unless it is an emergency!
 	'wgAuthenticationTokenVersion' => [
-		'default' => '10',
+		'default' => '11',
 	],
 
 	'wgEnableEditRecovery' => [
@@ -187,9 +220,19 @@ $wgConf->settings += [
 	'wgCentralAuthPreventUnattached' => [
 		'default' => true,
 	],
+	'wgCentralAuthRestrictSharedDomain' => [
+		'default' => true,
+	],
+	'wgCentralAuthCentralWiki' => [
+		'default' => 'metawiki',
+		'beta' => 'metawikibeta',
+	],
 	'wmgCentralAuthAutoLoginWikis' => [
 		'default' => [
 			'.wikivy.com' => 'metawiki'
+		],
+		'beta' => [
+			'.wikivy.dev' => 'metawikibeta',
 		],
 	],
 	'wgGlobalRenameDenylist' => [
@@ -1442,22 +1485,9 @@ $wgConf->settings += [
 	],
 
 	// Resources
-	'wgExtensionAssetsPath' => [
-		'default' => '/' . $wi->version . '/extensions',
-	],
-	'wgLocalStylePath' => [
-		'default' => '/' . $wi->version . '/skins',
-	],
-	'wgResourceBasePath' => [
-		'default' => '/' . $wi->version,
-	],
 	'wgResourceLoaderMaxQueryLength' => [
 		'default' => 5000,
 	],
-	'wgStylePath' => [
-		'default' => '/' . $wi->version . '/skins',
-	],
-
 
 	// Server
 	'wgArticlePath' => [
@@ -1465,9 +1495,6 @@ $wgConf->settings += [
 	],
 	'wgDisableOutputCompression' => [
 		'default' => true,
-	],
-	'wgScriptPath' => [
-		'default' => '/w',
 	],
 	'wgShowHostnames' => [
 		'default' => true,
@@ -1606,6 +1633,11 @@ $globals = WikivyFunctions::getConfigGlobals();
 
 // phpcs:ignore MediaWiki.Usage.ForbiddenFunctions.extract
 extract($globals);
+
+if ( $wmgSharedDomainPathPrefix ) {
+	$wgArticlePath = "{$wmgSharedDomainPathPrefix}/wiki/\$1";
+	$wgServer = '//' . $wi->getSharedDomain();
+}
 
 $wi->loadExtensions();
 
