@@ -528,19 +528,19 @@ $wgConf->settings += [
 	],
 	'wgCreateWikiSQLFiles' => [
 		'default' => [
-			"$IP/sql/postgres/tables-generated.sql",
-			"$IP/extensions/AbuseFilter/db_patches/postgres/tables-generated.sql",
-			"$IP/extensions/AntiSpoof/sql/postgres/tables-generated.sql",
+			"$IP/sql/mysql/tables-generated.sql",
+			"$IP/extensions/AbuseFilter/db_patches/mysql/tables-generated.sql",
+			"$IP/extensions/AntiSpoof/sql/mysql/tables-generated.sql",
 			"$IP/extensions/BetaFeatures/sql/tables-generated.sql",
-			"$IP/extensions/CheckUser/schema/postgres/tables-generated.sql",
+			"$IP/extensions/CheckUser/schema/mysql/tables-generated.sql",
 			"$IP/extensions/DataDump/sql/data_dump.sql",
-			"$IP/extensions/Echo/sql/postgres/tables-generated.sql",
-			"$IP/extensions/GlobalBlocking/sql/postgres/tables-generated-global_block_whitelist.sql",
-			"$IP/extensions/Linter/sql/postgres/tables-generated.sql",
-			"$IP/extensions/MediaModeration/schema/postgres/tables-generated.sql",
-			"$IP/extensions/OAuth/schema/postgres/tables-generated.sql",
+			"$IP/extensions/Echo/sql/mysql/tables-generated.sql",
+			"$IP/extensions/GlobalBlocking/sql/mysql/tables-generated-global_block_whitelist.sql",
+			"$IP/extensions/Linter/sql/mysql/tables-generated.sql",
+			"$IP/extensions/MediaModeration/schema/mysql/tables-generated.sql",
+			"$IP/extensions/OAuth/schema/mysql/tables-generated.sql",
 			"$IP/extensions/RottenLinks/sql/rottenlinks.sql",
-			"$IP/extensions/UrlShortener/schemas/postgres/tables-generated.sql",
+			"$IP/extensions/UrlShortener/schemas/mysql/tables-generated.sql",
 		],
 	],
 	'wgCreateWikiStateDays' => [
@@ -680,9 +680,9 @@ $wgConf->settings += [
 	'wgSharedTables' => [
 		'default' => [],
 	],
-	'wgDBmwschema' => [
+	/*'wgDBmwschema' => [
 		'default' => 'public'
-	],
+	],*/
 	'+wgVirtualDomainsMapping' => [
 		'default' => [
 			'virtual-botpasswords' => [
@@ -1023,7 +1023,7 @@ $wgConf->settings += [
 		],
 	],
 	'wgManageWikiHelpUrl' => [
-		'default' => '//meta.miraheze.org/wiki/Special:MyLanguage/ManageWiki',
+		'default' => '//meta.wikivy.com/wiki/Special:MyLanguage/ManageWiki',
 	],
 	'wgManageWikiModulesEnabled' => [
 		'default' => [

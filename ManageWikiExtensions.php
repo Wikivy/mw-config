@@ -214,7 +214,7 @@ $wgManageWikiExtensions = [
 		'requires' => [],
 		'install' => [
 			'sql' => [
-				'uw_campaigns' => 'extensions/MediaUploader/sql/postgres/tables-generated.sql',
+				'uw_campaigns' => 'extensions/MediaUploader/sql/mysql/tables-generated.sql',
 			],
 			'namespaces' => [
 				'Campaign' => [
@@ -380,11 +380,11 @@ $wgManageWikiExtensions = [
 		'requires' => [],
 		'install' => [
 			'sql' => [
-				'cs_associated_pages' => 'extensions/CommentStreams/sql/postgres/cs_associated_pages.sql',
-				'cs_comments' => 'extensions/CommentStreams/sql/postgres/cs_comments.sql',
-				'cs_replies' => 'extensions/CommentStreams/sql/postgres/cs_replies.sql',
-				'cs_votes' => 'extensions/CommentStreams/sql/postgres/cs_votes.sql',
-				'cs_watchlist' => 'extensions/CommentStreams/sql/postgres/cs_watchlist.sql',
+				'cs_associated_pages' => 'extensions/CommentStreams/sql/mysql/cs_associated_pages.sql',
+				'cs_comments' => 'extensions/CommentStreams/sql/mysql/cs_comments.sql',
+				'cs_replies' => 'extensions/CommentStreams/sql/mysql/cs_replies.sql',
+				'cs_votes' => 'extensions/CommentStreams/sql/mysql/cs_votes.sql',
+				'cs_watchlist' => 'extensions/CommentStreams/sql/mysql/cs_watchlist.sql',
 			],
 			'permissions' => [
 				'user' => [
@@ -1303,8 +1303,8 @@ $wgManageWikiExtensions = [
 		'requires' => [],
 		'install' => [
 			'sql' => [
-				'moderation' => 'extensions/Moderation/sql/postgres/tables-generated.sql',
-				'moderation_block' => 'extensions/Moderation/sql/postgres/tables-generated.sql',
+				'moderation' => 'extensions/Moderation/sql/mysql/tables-generated.sql',
+				'moderation_block' => 'extensions/Moderation/sql/mysql/tables-generated.sql',
 			],
 			'permissions' => [
 				'automoderated' => [
@@ -1373,7 +1373,7 @@ $wgManageWikiExtensions = [
 		],
 		'install' => [
 			'sql' => [
-				'campaign_events' => 'extensions/CampaignEvents/db_patches/postgres/tables-generated.sql',
+				'campaign_events' => 'extensions/CampaignEvents/db_patches/mysql/tables-generated.sql',
 			],
 			'namespaces' => [
 				'Event' => [
@@ -1502,7 +1502,7 @@ $wgManageWikiExtensions = [
 		'requires' => [],
 		'install' => [
 			'sql' => [
-				'flaggedpages' => 'extensions/FlaggedRevs/includes/backend/schema/postgres/tables-generated.sql',
+				'flaggedpages' => 'extensions/FlaggedRevs/includes/backend/schema/mysql/tables-generated.sql',
 			],
 			'permissions' => [
 				'editor' => [
@@ -1589,7 +1589,7 @@ $wgManageWikiExtensions = [
 		'requires' => [],
 		'install' => [
 			'sql' => [
-				'linter' => 'extensions/Linter/sql/postgres/tables-generated.sql',
+				'linter' => 'extensions/Linter/sql/mysql/tables-generated.sql',
 			],
 		],
 		'section' => 'specialpages',
@@ -1742,7 +1742,7 @@ $wgManageWikiExtensions = [
 		'requires' => [],
 		'install' => [
 			'sql' => [
-				'pagetriage_tags' => 'extensions/PageTriage/sql/postgres/tables-generated.sql',
+				'pagetriage_tags' => 'extensions/PageTriage/sql/mysql/tables-generated.sql',
 			],
 		],
 		'section' => 'specialpages',
@@ -1893,18 +1893,18 @@ $wgManageWikiExtensions = [
 				],
 			],
 			'sql' => [
-				'revtag' => 'extensions/Translate/sql/postgres/revtag.sql',
-				'translate_cache' => 'extensions/Translate/sql/postgres/translate_cache.sql',
-				'translate_groupreviews' => 'extensions/Translate/sql/postgres/translate_groupreviews.sql',
-				'translate_groupstats' => 'extensions/Translate/sql/postgres/translate_groupstats.sql',
-				'translate_message_group_subscriptions' => 'extensions/Translate/sql/postgres/translate_message_group_subscriptions.sql',
-				'translate_messageindex' => 'extensions/Translate/sql/postgres/translate_messageindex.sql',
-				'translate_metadata' => 'extensions/Translate/sql/postgres/translate_metadata.sql',
-				'translate_reviews' => 'extensions/Translate/sql/postgres/translate_reviews.sql',
-				'translate_sections' => 'extensions/Translate/sql/postgres/translate_sections.sql',
-				'translate_stash' => 'extensions/Translate/sql/postgres/translate_stash.sql',
-				'translate_tms' => 'extensions/Translate/sql/postgres/translate_tm.sql',
-				'translate_translatable_bundles' => 'extensions/Translate/sql/postgres/translate_translatable_bundles.sql',
+				'revtag' => 'extensions/Translate/sql/mysql/revtag.sql',
+				'translate_cache' => 'extensions/Translate/sql/mysql/translate_cache.sql',
+				'translate_groupreviews' => 'extensions/Translate/sql/mysql/translate_groupreviews.sql',
+				'translate_groupstats' => 'extensions/Translate/sql/mysql/translate_groupstats.sql',
+				'translate_message_group_subscriptions' => 'extensions/Translate/sql/mysql/translate_message_group_subscriptions.sql',
+				'translate_messageindex' => 'extensions/Translate/sql/mysql/translate_messageindex.sql',
+				'translate_metadata' => 'extensions/Translate/sql/mysql/translate_metadata.sql',
+				'translate_reviews' => 'extensions/Translate/sql/mysql/translate_reviews.sql',
+				'translate_sections' => 'extensions/Translate/sql/mysql/translate_sections.sql',
+				'translate_stash' => 'extensions/Translate/sql/mysql/translate_stash.sql',
+				'translate_tms' => 'extensions/Translate/sql/mysql/translate_tm.sql',
+				'translate_translatable_bundles' => 'extensions/Translate/sql/mysql/translate_translatable_bundles.sql',
 			],
 		],
 		'section' => 'specialpages',
@@ -2323,8 +2323,8 @@ $wgManageWikiExtensions = [
 		],
 		'install' => [
 			'sql' => [
-				'discussiontools_items' => 'extensions/DiscussionTools/sql/postgres/discussiontools_persistent.sql',
-				'discussiontools_subscription' => 'extensions/DiscussionTools/sql/postgres/discussiontools_subscription.sql',
+				'discussiontools_items' => 'extensions/DiscussionTools/sql/mysql/discussiontools_persistent.sql',
+				'discussiontools_subscription' => 'extensions/DiscussionTools/sql/mysql/discussiontools_subscription.sql',
 			],
 		],
 		'section' => 'other',
@@ -2694,7 +2694,7 @@ $wgManageWikiExtensions = [
 				],
 			],
 			'sql' => [
-				'nl_newsletters' => 'extensions/Newsletter/sql/postgres/tables-generated.sql',
+				'nl_newsletters' => 'extensions/Newsletter/sql/mysql/tables-generated.sql',
 			],
 		],
 		'section' => 'other',
@@ -2885,7 +2885,7 @@ $wgManageWikiExtensions = [
 		],
 		'install' => [
 			'sql' => [
-				'wbs_propertypairs' => 'extensions/PropertySuggester/sql/postgres/tables-generated.sql',
+				'wbs_propertypairs' => 'extensions/PropertySuggester/sql/mysql/tables-generated.sql',
 			],
 		],
 		'section' => 'other',
@@ -3149,8 +3149,8 @@ $wgManageWikiExtensions = [
 		'section' => 'other',
 		'install' => [
 			'sql' => [
-				'mws_title_index' => 'extensions/OOJSPlus/vendor/mwstake/mediawiki-component-commonwebapis/sql/postgres/mws_title_index.sql',
-				'mws_user_index' => 'extensions/OOJSPlus/vendor/mwstake/mediawiki-component-commonwebapis/sql/postgres/mws_user_index.sql',
+				'mws_title_index' => 'extensions/OOJSPlus/vendor/mwstake/mediawiki-component-commonwebapis/sql/mysql/mws_title_index.sql',
+				'mws_user_index' => 'extensions/OOJSPlus/vendor/mwstake/mediawiki-component-commonwebapis/sql/mysql/mws_user_index.sql',
 			],
 		],
 	],
@@ -3167,7 +3167,7 @@ $wgManageWikiExtensions = [
 		],
 		'install' => [
 			'sql' => [
-				'flow_revision' => 'extensions/Flow/sql/postgres/tables-generated.sql',
+				'flow_revision' => 'extensions/Flow/sql/mysql/tables-generated.sql',
 			],
 			'namespaces' => [
 				'Topic' => [
@@ -3544,12 +3544,12 @@ $wgManageWikiExtensions = [
 		'requires' => [],
 		'install' => [
 			'sql' => [
-				'wbc_entity_usage' => 'extensions/Wikibase/client/sql/postgres/entity_usage.sql',
-				'wb_items_per_site' => 'extensions/Wikibase/repo/sql/postgres/wb_items_per_site.sql',
-				'wb_id_counters' => 'extensions/Wikibase/repo/sql/postgres/wb_id_counters.sql',
-				'wb_changes' => 'extensions/Wikibase/repo/sql/postgres/wb_changes.sql',
-				'wb_changes_subscription' => 'extensions/Wikibase/repo/sql/postgres/wb_changes_subscription.sql',
-				'wb_property_info' => 'extensions/Wikibase/repo/sql/postgres/wb_property_info.sql',
+				'wbc_entity_usage' => 'extensions/Wikibase/client/sql/mysql/entity_usage.sql',
+				'wb_items_per_site' => 'extensions/Wikibase/repo/sql/mysql/wb_items_per_site.sql',
+				'wb_id_counters' => 'extensions/Wikibase/repo/sql/mysql/wb_id_counters.sql',
+				'wb_changes' => 'extensions/Wikibase/repo/sql/mysql/wb_changes.sql',
+				'wb_changes_subscription' => 'extensions/Wikibase/repo/sql/mysql/wb_changes_subscription.sql',
+				'wb_property_info' => 'extensions/Wikibase/repo/sql/mysql/wb_property_info.sql',
 			],
 			'mwscript' => [
 				PopulateWikibaseSitesTable::class => [],
@@ -3564,16 +3564,16 @@ $wgManageWikiExtensions = [
 		'requires' => [],
 		'install' => [
 			'sql' => [
-				'wb_changes' => 'extensions/Wikibase/repo/sql/postgres/wb_changes.sql',
-				'wb_changes_subscription' => 'extensions/Wikibase/repo/sql/postgres/wb_changes_subscription.sql',
-				'wb_items_per_site' => 'extensions/Wikibase/repo/sql/postgres/wb_items_per_site.sql',
-				'wb_id_counters' => 'extensions/Wikibase/repo/sql/postgres/wb_id_counters.sql',
-				'wbt_item_terms' => 'extensions/Wikibase/repo/sql/postgres/term_store.sql',
-				'wbt_term_in_lang' => 'extensions/Wikibase/repo/sql/postgres/term_store.sql',
-				'wbt_text_in_lang' => 'extensions/Wikibase/repo/sql/postgres/term_store.sql',
-				'wbt_text' => 'extensions/Wikibase/repo/sql/postgres/term_store.sql',
-				'wb_property_info' => 'extensions/Wikibase/repo/sql/postgres/wb_property_info.sql',
-				'wbt_property_terms' => 'extensions/Wikibase/repo/sql/postgres/term_store.sql',
+				'wb_changes' => 'extensions/Wikibase/repo/sql/mysql/wb_changes.sql',
+				'wb_changes_subscription' => 'extensions/Wikibase/repo/sql/mysql/wb_changes_subscription.sql',
+				'wb_items_per_site' => 'extensions/Wikibase/repo/sql/mysql/wb_items_per_site.sql',
+				'wb_id_counters' => 'extensions/Wikibase/repo/sql/mysql/wb_id_counters.sql',
+				'wbt_item_terms' => 'extensions/Wikibase/repo/sql/mysql/term_store.sql',
+				'wbt_term_in_lang' => 'extensions/Wikibase/repo/sql/mysql/term_store.sql',
+				'wbt_text_in_lang' => 'extensions/Wikibase/repo/sql/mysql/term_store.sql',
+				'wbt_text' => 'extensions/Wikibase/repo/sql/mysql/term_store.sql',
+				'wb_property_info' => 'extensions/Wikibase/repo/sql/mysql/wb_property_info.sql',
+				'wbt_property_terms' => 'extensions/Wikibase/repo/sql/mysql/term_store.sql',
 			],
 			'permissions' => [
 				'*' => [
