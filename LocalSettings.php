@@ -1703,6 +1703,31 @@ $wgConf->settings += [
 		'default' => true,
 	],
 
+	// OAuth
+	'wgMWOAuthCentralWiki' => [
+		'default' => 'metawiki',
+		'ldapwikiwiki' => false,
+		'beta' => 'metawikibeta',
+	],
+	'wgOAuth2GrantExpirationInterval' => [
+		'default' => 'PT4H',
+	],
+	'wgOAuth2RefreshTokenTTL' => [
+		'default' => 'P365D',
+	],
+	'wgMWOAuthSharedUserSource' => [
+		'default' => 'CentralAuth',
+	],
+	'wgMWOAuthSecureTokenTransfer' => [
+		'default' => true,
+	],
+	'wgOAuth2PublicKey' => [
+		'default' => '/srv/mediawiki/config/OAuth2.key.pub',
+	],
+	'wgOAuth2PrivateKey' => [
+		'default' => '/srv/mediawiki/config/OAuth2.key',
+	],
+
 	// Resources
 	'wgResourceLoaderMaxQueryLength' => [
 		'default' => 5000,
