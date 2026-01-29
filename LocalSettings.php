@@ -1728,6 +1728,50 @@ $wgConf->settings += [
 		'default' => '/srv/mediawiki/config/OAuth2.key',
 	],
 
+	// RemovePII
+	'wgRemovePIIAllowedWikis' => [
+		'default' => [
+			'metawiki',
+			'metawikibeta',
+		],
+	],
+	'wgRemovePIIAutoPrefix' => [
+		'default' => 'WikivyGDPR_',
+	],
+	'wgRemovePIIDPAValidationEndpoint' => [
+		'default' => 'https://reports.wikivy.com/api/dpa/{dpa_id}/{username}',
+	],
+	'wgRemovePIIHashPrefixOptions' => [
+		'default' => [
+			'Trust and Safety' => 'WikivyGDPR_',
+			'Stewards' => 'Vanished user ',
+		],
+	],
+	'wgRemovePIIHashPrefix' => [
+		'default' => 'WikivyGDPR_',
+	],
+
+	// RequestCustomDomain
+	'wgRequestCustomDomainDatabaseSuffix' => [
+		'default' => 'wiki',
+		'beta' => 'wikibeta',
+	],
+	'wgRequestCustomDomainDisallowedDomains' => [
+		'default' => [
+			'wikivy.com',
+			'wikivy.wiki',
+		],
+	],
+	'wgRequestCustomDomainSubdomain' => [
+		'default' => 'wikivy.com',
+		'beta' => 'wikivy.dev',
+	],
+	'wgRequestCustomDomainUsersNotifiedOnAllRequests' => [
+		'default' => [
+			'Spacetrain31'
+		],
+	],
+
 	// Resources
 	'wgResourceLoaderMaxQueryLength' => [
 		'default' => 5000,
@@ -1843,6 +1887,41 @@ $wgConf->settings += [
 	],
 	'wgCdnMaxAge' => [
 		'default' => 432000,
+	],
+
+	// Wikibase
+	'wmgAllowEntityImport' => [
+		'default' => false,
+	],
+	'wmgCanonicalUriProperty' => [
+		'default' => false,
+	],
+	'wmgEnableEntitySearchUI' => [
+		'default' => false,
+	],
+	'wmgFederatedPropertiesEnabled' => [
+		'default' => false,
+	],
+	'wmgFormatterUrlProperty' => [
+		'default' => false,
+	],
+	'wmgWikibaseRepoDatabase' => [
+		'default' => $wi->dbname
+	],
+	'wmgWikibaseRepoUrl' => [
+		'default' => 'https://wikidata.org'
+	],
+	'wmgWikibaseItemNamespaceID' => [
+		'default' => 0
+	],
+	'wmgWikibasePropertyNamespaceID' => [
+		'default' => 120
+	],
+	'wmgWikibaseRepoItemNamespaceID' => [
+		'default' => 860
+	],
+	'wmgWikibaseRepoPropertyNamespaceID' => [
+		'default' => 862
 	],
 
 	// CreateWiki Defined Special Variables

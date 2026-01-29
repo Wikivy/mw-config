@@ -149,6 +149,7 @@ if ( $cwClosed ) {
 // Public Wikis
 if ( !$cwPrivate ) {
 	$wgDiscordIncomingWebhookUrl = $wmgGlobalDiscordWebhookUrl;
+
 	$wgDiscordExperimentalWebhook = $wmgDiscordExperimentalWebhook;
 }
 
