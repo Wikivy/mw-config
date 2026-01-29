@@ -34,6 +34,11 @@ if ( $wi->dbname !== 'ldapwikiwiki' ) {
 	$wgLoginNotifyUseCentralId = true;
 }
 
+if ( $wi->isAnyOfExtensionsActive( 'WikibaseClient', 'WikibaseRepository' ) ) {
+	// Includes Wikibase Configuration. There is a global and per-wiki system here.
+	require_once '/srv/mediawiki/config/Wikibase.php';
+}
+
 // Dynamic cookie settings dependant on $wgServer
 foreach ( $wi->getAllowedDomains() as $domain ) {
 	if ( preg_match( '/' . preg_quote( $domain ) . '$/', $wi->server ) ) {
