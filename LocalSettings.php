@@ -970,6 +970,110 @@ $wgConf->settings += [
 		'default' => true,
 	],
 
+	// Files
+	'wgEnableUploads' => [
+		'default' => true,
+	],
+	'wgEnableAsyncUploads' => [
+		'default' => true,
+	],
+	'wgMaxUploadSize' => [
+		'default' => 1024 * 1024 * 4096
+	],
+	'wgAllowCopyUploads' => [
+		'default' => false,
+	],
+	'wgCopyUploadsFromSpecialUpload' => [
+		'default' => false,
+	],
+	'wgCopyUploadProxy' => [
+		'default' => $wmgHTTPProxy,
+	],
+	'wgFileExtensions' => [
+		'default' => [
+			'djvu',
+			'gif',
+			'ico',
+			'jpg',
+			'jpeg',
+			'ogg',
+			'pdf',
+			'png',
+			'svg',
+			'webp',
+		],
+	],
+	'wgUseQuickInstantCommons' => [
+		'default' => true,
+	],
+	'wgQuickInstantCommonsPrefetchMaxLimit' => [
+		'default' => 1000,
+	],
+	'wgMaxImageArea' => [
+		'default' => 10e7,
+	],
+	'wgMaxAnimatedGifArea' => [
+		'default' => '1.25e7',
+	],
+	'wgWikivyCommons' => [
+		'default' => true,
+	],
+	'wgWikivyReportsBlockAlertKeywords' => [
+		'default' => [
+			'underage',
+			'under age',
+			'under 13',
+			'death threats',
+			'death threat',
+			'child pornography',
+			'images of children',
+			'images of minors',
+			'suicide',
+			'kill me',
+			'kill themselves',
+			'kill themselfs',
+			'kill themself',
+			'murder',
+			'terrorist',
+			'terrorism',
+			'bomb threat',
+			'bomb hoax',
+		],
+	],
+	'wgEnableImageWhitelist' => [
+		'default' => false,
+	],
+	'wgImagePreconnect' => [
+		'default' => true,
+	],
+	'wgImgTagSanitizeDomain' => [
+		'default' => false,
+	],
+	'wgShowArchiveThumbnails' => [
+		'default' => true,
+	],
+	'wgVerifyMimeType' => [
+		'default' => true,
+	],
+	'wgSVGMetadataCutoff' => [
+		'default' => 5242880,
+	],
+	'wgSVGConverter' => [
+		'default' => 'rsvg',
+	],
+	'wgSVGConverterPath' => [
+		'default' => '/usr/local/bin',
+	],
+	'wgSVGNativeRendering' => [
+		'default' => true,
+	],
+	'wgUploadMissingFileUrl' => [
+		'default' => false,
+	],
+	'wgUploadNavigationUrl' => [
+		'default' => false,
+	],
+
 	// GlobalCssJs
 	'wgGlobalCssJsConfig' => [
 		'default' => [
@@ -998,7 +1102,7 @@ $wgConf->settings += [
 	'wgUseGlobalSiteCssJs' => [
 		'default' => false,
 	],
-	
+
 	// Grant Permissions for BotPasswords and OAuth
 	'+wgGrantPermissions' => [
 		'default' => [
@@ -1014,6 +1118,40 @@ $wgConf->settings += [
 	],
 	'+wgGrantPermissionGroups' => [
 		'default' => [],
+	],
+
+	// ImageMagick
+	'wgUseImageMagick' => [
+		'default' => true,
+	],
+	'wgImageMagickConvertCommand' => [
+		'default' => '/usr/local/bin/mediawiki-firejail-convert',
+	],
+	'wgJpegPixelFormat' => [
+		'default' => 'yuv420',
+	],
+	'wgSharpenParameter' => [
+		'default' => '0x0.8',
+	],
+	'wgImageMagickTempDir' => [
+		'default' => '/tmp/magick-tmp',
+	],
+
+	// Image Limits
+	'wgImageLimits' => [
+		'default' => [
+			[ 320, 240 ],
+			[ 640, 480 ],
+			[ 800, 600 ],
+			[ 1024, 768 ],
+			[ 1280, 1024 ],
+			[ 2560, 2048 ],
+		],
+		'dmlwikiwiki' => [
+			[ 320, 240 ],
+			[ 640, 480 ],
+			[ 800, 800 ],
+		],
 	],
 
 	// Interwiki
@@ -1726,7 +1864,12 @@ require_once __DIR__ . '/ManageWikiNamespaces.php';
 require_once __DIR__ . '/ManageWikiSettings.php';
 
 $wgUploadPath = "//$wmgUploadHostname/$wgDBname";
-$wgUploadDirectory = false;
+//$wgUploadDirectory = false;
+$wgUploadDirectory = "/srv/static/$wgDBname";
+
+if ($cwPrivate) {
+	$wgUploadDirectory = "/srv/static/private/$wgDBname";
+}
 
 // These are not loaded by mergeMessageFileList.php due to not being on ExtensionRegistry
 $wgMessagesDirs['SocialProfile'] = $IP . '/extensions/SocialProfile/i18n';
