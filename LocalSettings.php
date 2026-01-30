@@ -43,16 +43,19 @@ if ( ( $_SERVER['HTTP_HOST'] ?? '' ) === $wi->getSharedDomain()
 		exit( 1 );
 	}
 
-	$wgLoadScript = "{$wi->server}$wgScriptPath/load.php";
 	$wmgSharedDomainPathPrefix = "/$wgDBname";
+	$wgScriptPath  = "$wmgSharedDomainPathPrefix/w";
 
 	$wgCanonicalServer = 'https://' . $wi->getSharedDomain();
+	$wgLoadScript = "{$wgCanonicalServer}$wgScriptPath/load.php";
 
 	$wgUseSiteCss = false;
 	$wgUseSiteJs = false;
+
+	// We use load.php directly from auth for custom domains due to CSP
+	$wgCentralAuthSul3SharedDomainRestrictions['allowedEntryPoints'] = [ 'load' ];
 }
 
-$wgScriptPath  = "$wmgSharedDomainPathPrefix/w";
 $wgScript = "$wgScriptPath/index.php";
 
 $wgResourceBasePath = "$wmgSharedDomainPathPrefix/{$wi->version}";
@@ -1958,7 +1961,7 @@ $globals = WikivyFunctions::getConfigGlobals();
 extract($globals);
 
 if ( $wmgSharedDomainPathPrefix ) {
-	$wgArticlePath = "{$wmgSharedDomainPathPrefix}/wiki/\$1";
+	$wgArticlePath = $wmgSharedDomainPathPrefix . $wgArticlePath;
 	$wgServer = '//' . $wi->getSharedDomain();
 }
 
