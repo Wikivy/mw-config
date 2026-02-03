@@ -975,6 +975,29 @@ $wgConf->settings += [
 		'default' => true,
 	],
 
+	// Footers
+	'+wgFooterIcons' => [
+		'default' => [
+			'wikivy' => [
+				'wikivy' => [
+					'src' => 'https://static.wikivy.com/commonswiki/1/15/Powered_by_Wikivy_%28no_box%29.svg',
+					'url' => 'https://meta.wikivy.com/wiki/Special:MyLanguage/Wikivy_Meta',
+					'alt' => 'Hosted by Wikivy',
+				],
+			],
+		],
+	],
+	'wmgWikiapiaryFooterPageName' => [
+		'default' => '',
+	],
+
+	'wgMaxCredits' => [
+		'default' => 0,
+	],
+	'wgShowCreditsIfMax' => [
+		'default' => true,
+	],
+
 	// Files
 	'wgEnableUploads' => [
 		'default' => true,
@@ -1856,6 +1879,9 @@ $wgConf->settings += [
 	],
 	'wgFavicon' => [
 		'default' => '/favicon.ico',
+	],
+	'wgLogo' => [
+		'default' => "https://$wmgUploadHostname/metawiki/c/c9/Wikivy_Logo.svg",
 	],
 	'wgIcon' => [
 		'default' => false,
