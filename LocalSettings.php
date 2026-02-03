@@ -1920,9 +1920,6 @@ $wgConf->settings += [
 
 	// Varnish
 	'wgUseCdn' => [
-		'default' => false,
-	],
-	'wgDebugToolbar' => [
 		'default' => true,
 	],
 	'wgCdnServersNoPurge' => [
