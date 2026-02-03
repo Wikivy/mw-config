@@ -1303,11 +1303,6 @@ $wgConf->settings += [
 	],
 	'wgManageWikiPermissionsAdditionalAddGroups' => [
 		'default' => [],
-		'sesupportwiki' => [
-			'sysop' => [
-				'editor',
-			],
-		],
 		'metawiki' => [
 			'techteam' => [
 				'techteam',
@@ -1319,11 +1314,6 @@ $wgConf->settings += [
 	],
 	'wgManageWikiPermissionsAdditionalRemoveGroups' => [
 		'default' => [],
-		'sesupportwiki' => [
-			'sysop' => [
-				'editor',
-			],
-		],
 		'metawiki' => [
 			'techteam' => [
 				'techteam',
@@ -1805,6 +1795,29 @@ $wgConf->settings += [
 		'default' => 5000,
 	],
 
+	// Rights
+	'+wgAvailableRights' => [
+		'default' => [],
+		'metawiki' => [
+			'editautopatrolprotected',
+		],
+		'+ext-SocialProfile' => [
+			'updatepoints',
+		],
+	],
+
+	// RightFunctions
+	'wgRightFunctionsUserGroups' => [
+		'default' => [
+			'*',
+			'user',
+			'autoconfirmed',
+			'sysop',
+			'bureaucrat',
+		],
+	],
+
+
 	// Server
 	'wgArticlePath' => [
 		'default' => '/wiki/$1',
@@ -1881,6 +1894,9 @@ $wgConf->settings += [
 
 	// Varnish
 	'wgUseCdn' => [
+		'default' => false,
+	],
+	'wgDebugToolbar' => [
 		'default' => true,
 	],
 	'wgCdnServersNoPurge' => [
