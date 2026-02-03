@@ -1273,6 +1273,7 @@ $wgConf->settings += [
 	'wgEnableEmail' => [
 		'default' => true,
 	],
+	'wgSMTP' => $wgSMTP,
 	'wgEnotifWatchlist' => [
 		'default' => true,
 	],
