@@ -1014,9 +1014,6 @@ $wgConf->settings += [
 	'wgCopyUploadsFromSpecialUpload' => [
 		'default' => false,
 	],
-	'wgCopyUploadProxy' => [
-		'default' => $wmgHTTPProxy,
-	],
 	'wgFileExtensions' => [
 		'default' => [
 			'djvu',
