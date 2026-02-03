@@ -1269,6 +1269,40 @@ $wgConf->settings += [
 		'beta' => true,
 	],
 
+	// Mail
+	'wgEnableEmail' => [
+		'default' => true,
+	],
+	'wgSMTP' => [
+		'default' => [
+			'host' => 'mail.wikivy.com',
+			'port' => 465,
+			'IDHost' => 'wikivy.com',
+			'auth' => true,
+		],
+	],
+	'wgEnotifWatchlist' => [
+		'default' => true,
+	],
+	'wgUserEmailUseReplyTo' => [
+		'default' => true,
+	],
+	'wgEmailConfirmToEdit' => [
+		'default' => false,
+	],
+	'wgEmergencyContact' => [
+		'default' => 'noreply@wikivy.com',
+	],
+	'wgAllowHTMLEmail' => [
+		'default' => true,
+	],
+	'wgEnableSpecialMute' => [
+		'default' => true,
+	],
+	'wgEnableUserEmailMuteList' => [
+		'default' => true,
+	],
+
 	// ManageWiki
 	'wgManageWikiCacheDirectory' => [
 		'default' => '/srv/mediawiki/cache',
