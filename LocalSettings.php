@@ -1733,6 +1733,29 @@ $wgConf->settings += [
 		'default' => '/srv/mediawiki/config/OAuth2.key',
 	],
 
+	// Permissions
+	'wgGroupsAddToSelf' => [
+		'default' => [],
+	],
+	'wgGroupsRemoveFromSelf' => [
+		'default' => [],
+	],
+	'+wgRevokePermissions' => [
+		'default' => [],
+		'+metawiki' => [
+			'requestwikiblocked' => [
+				'requestwiki' => true,
+			],
+		],
+	],
+	'wgImplicitGroups' => [
+		'default' => [
+			'*',
+			'user',
+			'autoconfirmed'
+		],
+	],
+
 	// RemovePII
 	'wgRemovePIIAllowedWikis' => [
 		'default' => [
