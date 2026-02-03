@@ -1275,7 +1275,7 @@ $wgConf->settings += [
 	],
 	'wgSMTP' => [
 		'default' => [
-			'host' => 'mail.wikivy.com',
+			'host' => 'us1.workspace.org',
 			'port' => 465,
 			'IDHost' => 'wikivy.com',
 			'auth' => true,
