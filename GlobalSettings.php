@@ -228,3 +228,84 @@ if ( $wi->isExtensionActive( 'JsonConfig' ) ) {
 	}
 }
 
+// Licensing variables
+
+$wikivyhost = $wi->isBeta() ? 'wikivy.dev' : 'wikivy.com';
+
+/**
+ * Default values.
+ * We can not set these in LocalSettings.php, to prevent them
+ * from causing absolute overrides.
+ */
+$wgRightsIcon = "https://meta.$wikivyhost/{$wi->version}/resources/assets/licenses/cc-by-sa.png";
+$wgRightsText = 'Creative Commons Attribution Share Alike';
+$wgRightsUrl = 'https://creativecommons.org/licenses/by-sa/4.0/';
+
+/**
+ * Override values from ManageWiki.
+ * If set in LocalSettings.php, this will be overridden
+ * by wiki values there, due to caching forcing SiteConfiguration
+ * values to be absolute overrides. This is however how licensing should
+ * be forced. LocalSettings.php values should take priority, which they do.
+ */
+switch ( $wmgWikiLicense ) {
+	case 'arr':
+		$wgRightsIcon = 'https://static.wikivy.com/commonswiki/6/67/License_icon-copyright-88x31.svg';
+		$wgRightsText = 'All Rights Reserved';
+		$wgRightsUrl = false;
+		break;
+	case 'cc-by':
+		$wgRightsIcon = "https://meta.$wikivyhost/{$wi->version}/resources/assets/licenses/cc-by.png";
+		$wgRightsText = 'Creative Commons Attribution 4.0 International (CC BY 4.0)';
+		$wgRightsUrl = 'https://creativecommons.org/licenses/by/4.0';
+		break;
+	case 'cc-by-nc':
+		$wgRightsIcon = 'https://mirrors.creativecommons.org/presskit/buttons/88x31/png/by-nc.png';
+		$wgRightsText = 'Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)';
+		$wgRightsUrl = 'https://creativecommons.org/licenses/by-nc/4.0/';
+		break;
+	case 'cc-by-nd':
+		$wgRightsIcon = 'https://mirrors.creativecommons.org/presskit/buttons/88x31/png/by-nd.png';
+		$wgRightsText = 'Creative Commons Attribution-NoDerivatives 4.0 International (CC BY-ND 4.0)';
+		$wgRightsUrl = 'https://creativecommons.org/licenses/by-nd/4.0/';
+		break;
+	case 'cc-by-sa':
+		$wgRightsText = 'Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)';
+		$wgRightsUrl = 'https://creativecommons.org/licenses/by-sa/4.0/';
+		break;
+	case 'cc-by-sa-2-0-kr':
+		$wgRightsText = 'Creative Commons BY-SA 2.0 Korea';
+		$wgRightsUrl = 'https://creativecommons.org/licenses/by-sa/2.0/kr';
+		break;
+	case 'cc-by-sa-nc':
+		$wgRightsIcon = "https://meta.$wikivyhost/{$wi->version}/resources/assets/licenses/cc-by-nc-sa.png";
+		$wgRightsText = 'Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)';
+		$wgRightsUrl = 'https://creativecommons.org/licenses/by-nc-sa/4.0/';
+		break;
+	case 'cc-by-nc-nd':
+		$wgRightsIcon = 'https://mirrors.creativecommons.org/presskit/buttons/88x31/png/by-nc-nd.png';
+		$wgRightsText = 'Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)';
+		$wgRightsUrl = 'https://creativecommons.org/licenses/by-nc-nd/4.0/';
+		break;
+	case 'cc-pd':
+		$wgRightsIcon = "https://meta.$wikivyhost/{$wi->version}/resources/assets/licenses/cc-0.png";
+		$wgRightsText = 'CC0 Public Domain';
+		$wgRightsUrl = 'https://creativecommons.org/publicdomain/zero/1.0/';
+		break;
+	case 'gpl-v3':
+		$wgRightsIcon = 'https://static.wikivy.com/commonswiki/d/d8/Gplv3-or-later.png';
+		$wgRightsText = 'GPLv3';
+		$wgRightsUrl = 'https://www.gnu.org/licenses/gpl-3.0-standalone.html';
+		break;
+	case 'gfdl':
+		$wgRightsIcon = 'https://static.wikivy.com/commonswiki/6/61/Gfdl-logo-tiny.png';
+		$wgRightsText = 'GNU Free Document License 1.3';
+		$wgRightsUrl = 'https://www.gnu.org/licenses/fdl-1.3.en.html';
+		break;
+	case 'empty':
+		break;
+}
+
+// Don't need a global here
+unset( $wikivyhost );
+

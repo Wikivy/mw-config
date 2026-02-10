@@ -1,0 +1,250 @@
+<?php
+
+use MediaWiki\Extension\EventBus\Adapters\Monolog\EventBusMonologHandler;
+use MediaWiki\Logger\LoggerFactory;
+use MediaWiki\Logger\Monolog\BufferHandler;
+use MediaWiki\Logger\Monolog\ContextProcessor;
+use MediaWiki\Logger\Monolog\LogstashFormatter;
+use MediaWiki\Logger\Monolog\SyslogHandler;
+use MediaWiki\Logger\Monolog\WikiProcessor;
+use MediaWiki\Logger\MonologSpi;
+use Monolog\Handler\HandlerInterface;
+use Monolog\Handler\SamplingHandler;
+use Monolog\Handler\WhatFailureGroupHandler;
+use Monolog\Processor\PsrLogMessageProcessor;
+use Monolog\Processor\WebProcessor;
+use Psr\Log\LogLevel;
+
+// Monolog logging configuration
+
+$wmgMonologProcessors = [
+	'wiki' => [
+		'class' => WikiProcessor::class,
+	],
+	'psr' => [
+		'class' => PsrLogMessageProcessor::class,
+	],
+	'context' => [
+		'class' => ContextProcessor::class,
+	],
+	'web' => [
+		'class' => WebProcessor::class,
+	],
+	'wvconfig' => [
+		'factory' => static function (): Closure {
+			return static function ( array $record ): array {
+				global $wgLBFactoryConf, $wgDBname;
+				$record['extra']['shard'] = $wgLBFactoryConf['sectionsByDB'][$wgDBname] ?? 'c1';
+				return $record;
+			};
+		},
+	],
+];
+
+$wmgMonologHandlers = [];
+
+foreach ( [ 'debug', 'info', 'warning', 'error' ] as $logLevel ) {
+	$wmgMonologHandlers[ "graylog-$logLevel" ] = [
+		'class' => SyslogHandler::class,
+		'formatter' => 'logstash',
+		'args' => [
+			// tag
+			'mediawiki',
+			// host
+			'127.0.0.1',
+			// port
+			10514,
+			// facility
+			LOG_USER,
+			// log level threshold
+			$logLevel,
+		],
+	];
+}
+
+$wmgMonologHandlers['what-debug'] = [
+	'class'     => WhatFailureGroupHandler::class,
+	'formatter' => 'logstash',
+	'args' => [
+		static fn (): array => array_map(
+			[ LoggerFactory::getProvider(), 'getHandler' ],
+			[ 'graylog-debug' ]
+		),
+	],
+];
+
+// Post construction calls to make for new Logger instances
+$wmgMonologLoggerCalls = [
+	'setTimezone' => [ new DateTimeZone( 'UTC' ) ],
+];
+
+$wmgMonologConfig = [
+	'loggers' => [
+		// Template for all undefined log channels
+		'@default' => [
+			'handlers' => [ 'what-debug' ],
+			'processors' => array_keys( $wmgMonologProcessors ),
+			'calls' => $wmgMonologLoggerCalls,
+		],
+	],
+	'processors' => $wmgMonologProcessors,
+	'handlers' => $wmgMonologHandlers,
+	'formatters' => [
+		'logstash' => [
+			'class' => LogstashFormatter::class,
+			'args' => [ 'mediawiki', php_uname( 'n' ), '', '', 1 ],
+		],
+	],
+];
+
+// Add logging channels defined in $wmgMonologChannels
+foreach ( $wmgMonologChannels as $channel => $opts ) {
+	if ( $opts === false ) {
+		// Log channel disabled on this wiki
+		$wmgMonologConfig['loggers'][$channel] = [
+			'handlers' => [],
+			'calls' => $wmgMonologLoggerCalls,
+		];
+		continue;
+	}
+
+	$opts = is_array( $opts ) ? $opts : [ 'graylog' => $opts ];
+	$opts += [
+		'eventbus' => false,
+		'sample' => false,
+		'buffer' => false,
+		'graylog' => 'info',
+	];
+
+	$handlers = [];
+
+	if ( $opts['eventbus'] ) {
+		$eventBusHandler = "eventbus-{$opts['eventbus']}";
+		if ( !isset( $wmgMonologConfig['handlers'][$eventBusHandler] ) ) {
+			// Register handler that will only pass events of the given log level
+			$wmgMonologConfig['handlers'][$eventBusHandler] = [
+				'class' => EventBusMonologHandler::class,
+				'args' => [
+					// EventServiceName
+					'eventgate',
+				],
+			];
+		}
+		$handlers[] = $eventBusHandler;
+	}
+
+	// Configure Graylog handler
+	if ( $opts['graylog'] ) {
+		$level = $opts['graylog'];
+		$graylogHandler = "graylog-$level";
+		if ( isset( $wmgMonologHandlers[ $graylogHandler ] ) ) {
+			$handlers[] = $graylogHandler;
+		}
+	}
+
+	if ( $opts['sample'] ) {
+		$sample = $opts['sample'];
+		foreach ( $handlers as $idx => $handlerName ) {
+			$sampledHandler = "$handlerName-sampled-$sample";
+			// Register a handler that will sample the event stream and
+			// pass events on to $handlerName for storage
+			$wmgMonologConfig['handlers'][$sampledHandler] ??= [
+				'class' => SamplingHandler::class,
+				'args' => [
+					static fn (): HandlerInterface =>
+					LoggerFactory::getProvider()->getHandler( $handlerName ),
+					$sample,
+				],
+			];
+			$handlers[$idx] = $sampledHandler;
+		}
+	}
+
+	if ( $opts['buffer'] ) {
+		foreach ( $handlers as $idx => $handlerName ) {
+			$bufferedHandler = "$handlerName-buffered";
+			// Register a handler that will buffer the event stream and
+			// pass events to the nested handler after closing the request
+			$wmgMonologConfig['handlers'][$bufferedHandler] ??= [
+				'class' => BufferHandler::class,
+				'args' => [
+					static fn (): HandlerInterface =>
+					LoggerFactory::getProvider()->getHandler( $handlerName ),
+				],
+			];
+			$handlers[$idx] = $bufferedHandler;
+		}
+	}
+
+	if ( $handlers ) {
+		// wrap the collection of handlers in a WhatFailureGroupHandler
+		// to swallow any exceptions that might leak out otherwise
+		$failureGroupHandler = 'failuregroup|' . implode( '|', $handlers );
+		$wmgMonologConfig['handlers'][$failureGroupHandler] ??= [
+			'class' => WhatFailureGroupHandler::class,
+			'args' => [
+				static fn (): array => array_map(
+					[ LoggerFactory::getProvider(), 'getHandler' ],
+					$handlers
+				),
+			],
+		];
+
+		$wmgMonologConfig['loggers'][$channel] = [
+			'handlers' => [ $failureGroupHandler ],
+			'processors' => array_keys( $wmgMonologProcessors ),
+			'calls' => $wmgMonologLoggerCalls,
+		];
+
+	}
+}
+
+if ( $wmgLogToDisk ) {
+	$wmgLogDir = '/var/log/mediawiki';
+
+	$wgDBerrorLog = "$wmgLogDir/debuglogs/database.log";
+
+	$wgDebugLogGroups = [
+		'404' => "$wmgLogDir/debuglogs/404.log",
+		'api' => "$wmgLogDir/debuglogs/api.log",
+		'captcha' => "$wmgLogDir/debuglogs/captcha.log",
+		'CentralAuth' => "$wmgLogDir/debuglogs/CentralAuth.log",
+		'CreateWiki' => "$wmgLogDir/debuglogs/CreateWiki.log",
+		'Echo' => "$wmgLogDir/debuglogs/Echo.log",
+		'error' => "$wmgLogDir/debuglogs/php-error.log",
+		'exception' => "$wmgLogDir/debuglogs/exception.log",
+		'exec' => "$wmgLogDir/debuglogs/exec.log",
+		'ldap' => "$wmgLogDir/debuglogs/ldap.log",
+		'Math' => "$wmgLogDir/debuglogs/Math.log",
+		'MatomoAnalytics' => "$wmgLogDir/debuglogs/MatomoAnalytics.log",
+		'ManageWiki' => "$wmgLogDir/debuglogs/ManageWiki.log",
+		'memcached' => [
+			'destination' => "$wmgLogDir/debuglogs/memcached.log",
+			'level' => LogLevel::ERROR,
+		],
+		'OAuth' => "$wmgLogDir/debuglogs/OAuth.log",
+		'redis' => [
+			'destination' => "$wmgLogDir/debuglogs/redis.log",
+			'level' => LogLevel::WARNING,
+		],
+		'thumbnail' => "$wmgLogDir/debuglogs/thumbnail.log",
+		'VisualEditor' => "$wmgLogDir/debuglogs/VisualEditor.log",
+	];
+} else {
+	$wgMWLoggerDefaultSpi = [
+		'class' => MonologSpi::class,
+		'args' => [ $wmgMonologConfig ],
+	];
+}
+
+if ( MW_ENTRY_POINT === 'cli' ) {
+	ini_set( 'display_startup_errors', 1 );
+	ini_set( 'display_errors', 1 );
+
+	$wgShowExceptionDetails = true;
+	$wgDebugDumpSql = true;
+}
+
+if ( str_starts_with( wfHostname(), 'mwtask' ) ) {
+	$wgShowExceptionDetails = true;
+}
