@@ -214,7 +214,7 @@ if ( !$wmgSharedDomainPathPrefix ) {
 }
 
 // DataDump
-$wgDataDumpFileBackend = '/srv/static/dumps/';
+$wgDataDumpDirectory = '/srv/static/dumps/';
 
 $wgDataDump = [
 	'xml' => [
