@@ -26,6 +26,7 @@ switch ( $wi->dbname ) {
 		wfLoadExtensions([
 			'ContactPage',
 			'GlobalWatchlist',
+			'ReportIncident',
 			'RequestCustomDomain',
 			'SecurePoll',
 		]);
