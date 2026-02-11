@@ -48,12 +48,43 @@ if ( $wi->dbname !== 'ldapwikiwiki' ) {
 	}
 }
 
+if ( $wi->isExtensionActive( 'chameleon' ) ) {
+	wfLoadExtension( 'Bootstrap' );
+}
+
+if ( $wi->isExtensionActive( 'SocialProfile' ) ) {
+	require_once "$IP/extensions/SocialProfile/SocialProfile.php";
+	//$wgSocialProfileFileBackend = 'wikivy-swift';
+	$wgUserBoardAllowPrivateMessages = false;
+}
+
+if ( $wi->isExtensionActive( 'VisualEditor' ) ) {
+	$wgUseRestbaseVRS = false;
+	$wgVisualEditorDefaultParsoidClient = 'direct';
+	if ( $wmgVisualEditorEnableDefault ) {
+		$wgDefaultUserOptions['visualeditor-enable'] = 1;
+		$wgDefaultUserOptions['visualeditor-editor'] = 'visualeditor';
+	} else {
+		$wgDefaultUserOptions['visualeditor-enable'] = 0;
+		$wgDefaultUserOptions['visualeditor-editor'] = 'wikitext';
+	}
+}
+
 if ( $wi->isAnyOfExtensionsActive( 'WikibaseClient', 'WikibaseRepository' ) ) {
 	// Includes Wikibase Configuration. There is a global and per-wiki system here.
 	require_once '/srv/mediawiki/config/Wikibase.php';
 }
 
 $wgVirtualRestConfig = [
+	'modules' => [
+		'parsoid' => [
+			'url' => 'https://meta.wikivy.com/w/rest.php',
+			'domain' => $wi->server,
+			'prefix' => $wi->dbname,
+			'forwardCookies' => (bool)$cwPrivate,
+			'restbaseCompat' => false,
+		],
+	],
 	'global' => [
 		'domain' => $wgCanonicalServer,
 		'timeout' => 360,
@@ -126,6 +157,8 @@ if ( ( $wgMirahezeActionPathsFormat ?? 'default' ) !== 'default' ) {
 // Don't need globals here
 unset( $actions, $articlePath );
 
+$wgAllowedCorsHeaders[] = 'X-Wikivy-Debug';
+
 // Closed Wikis
 if ( $cwClosed ) {
 	$wgRevokePermissions = [
@@ -149,7 +182,6 @@ if ( $cwClosed ) {
 // Public Wikis
 if ( !$cwPrivate ) {
 	$wgDiscordIncomingWebhookUrl = $wmgGlobalDiscordWebhookUrl;
-
 	$wgDiscordExperimentalWebhook = $wmgDiscordExperimentalWebhook;
 }
 
@@ -173,6 +205,78 @@ if ( !$wmgSharedDomainPathPrefix ) {
 	}
 }
 
+// DataDump
+$wgDataDumpFileBackend = '/srv/static/dumps/';
+
+$wgDataDump = [
+	'xml' => [
+		'file_ending' => '.xml.gz',
+		'useBackendTempStore' => true,
+		'chunkSize' => 512 * 1024 * 1024,
+		'startChunkSize' => 1 * 1024 * 1024 * 1024,
+		'generate' => [
+			'type' => 'mwscript',
+			'script' => 'dumpBackup',
+			'options' => [
+				'--full',
+				'--logs',
+				'--uploads',
+				'--output',
+				'gzip:/tmp/${filename}',
+			],
+			'arguments' => [
+				'--namespaces'
+			],
+		],
+		'limit' => 1,
+		'permissions' => [
+			'view' => 'view-dump',
+			'generate' => 'generate-dump',
+			'delete' => 'delete-dump',
+		],
+		'htmlform' => [
+			'name' => 'namespaceselect',
+			'type' => 'namespaceselect',
+			'exists' => true,
+			'noArgsValue' => 'all',
+			'hide-if' => [ '!==', 'generatedumptype', 'xml' ],
+			'label-message' => 'datadump-namespaceselect-label'
+		],
+	],
+	'zip' => [
+		'file_ending' => '.zip',
+		'generate' => [
+			'type' => 'script',
+			'script' => '/usr/bin/zip',
+			'options' => [
+				'-r',
+				"{$wgDataDumpDirectory}" . '${filename}',
+				($cwPrivate ? "/srv/static/private/{$wgDBname}" : "/srv/static/{$wgDBname}"),  // 条件による切り替え
+			],
+		],
+		'limit' => 1,
+		'permissions' => [
+			'view' => 'view-dump',
+			'generate' => 'generate-dump',
+			'delete' => 'delete-dump',
+		],
+	],
+];
+
+// Email
+$wgSMTP = [
+	'host' => 'ssl://us1.workspace.org',
+	'IDHost' => 'wikivy.com',
+	'port' => 465,
+	'username' => 'noreply@wikivy.com',
+	'password' => $wgWikivyEmailPassword,
+	'auth' => true,
+];
+
+if ( !$wi->isExtensionActive( 'wikiseo' ) ) {
+	$wgSkinMetaTags = [ 'og:title', 'og:type' ];
+}
+
 // $wgLogos
 $wgLogos = [
 	'1x' => $wgLogo,
@@ -192,6 +296,17 @@ if ( $wgWordmark ) {
 		'src' => $wgWordmark,
 		'width' => $wgWordmarkWidth,
 		'height' => $wgWordmarkHeight,
+	];
+}
+
+// $wgUrlShortenerAllowedDomains
+$wgUrlShortenerAllowedDomains = [
+	'(.*\.)?wikivy\.com'
+];
+
+if ( preg_match( '/(wikivy)\.dev$/', $wi->server ) ) {
+	$wgUrlShortenerAllowedDomains = [
+		'(.*\.)?wikivy\.dev'
 	];
 }
 

@@ -1270,16 +1270,6 @@ $wgConf->settings += [
 	'wgEnableEmail' => [
 		'default' => true,
 	],
-	'wgSMTP' => [
-		'default' => [
-			'host' => 'us1.workspace.org',
-      		'port' => 465,
-      		'username' => 'noreply@wikivy.com',
-      		'password' => "$wvMailPassword",
-      		'IDHost' => 'wikivy.com',
-      		'auth' => true,
-		]
-	],
 	'wgEnotifWatchlist' => [
 		'default' => true,
 	],
