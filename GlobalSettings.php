@@ -76,7 +76,7 @@ if ( $wi->isAnyOfExtensionsActive( 'WikibaseClient', 'WikibaseRepository' ) ) {
 }
 
 $wgVirtualRestConfig = [
-	/*'modules' => [
+	'modules' => [
 		'parsoid' => [
 			'url' => 'https://meta.wikivy.com/w/rest.php',
 			'domain' => $wi->server,
@@ -84,7 +84,7 @@ $wgVirtualRestConfig = [
 			'forwardCookies' => (bool)$cwPrivate,
 			'restbaseCompat' => false,
 		],
-	],*/
+	],
 	'global' => [
 		'domain' => $wgCanonicalServer,
 		'timeout' => 360,
