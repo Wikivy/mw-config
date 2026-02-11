@@ -2051,6 +2051,7 @@ $wgConf->settings += [
 ];
 
 // ManageWiki settings
+require_once __DIR__ . '/ManageWikiExtensions.php';
 
 $globals = WikivyFunctions::getConfigGlobals();
 
