@@ -1279,6 +1279,11 @@ $wgConf->settings += [
 		'beta' => true,
 	],
 
+	// License
+	'wmgWikiLicense' => [
+		'default' => 'cc-by-sa',
+	],
+
 	// Mail
 	'wgEnableEmail' => [
 		'default' => true,
