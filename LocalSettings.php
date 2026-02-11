@@ -1047,6 +1047,9 @@ $wgConf->settings += [
 	'wgQuickInstantCommonsPrefetchMaxLimit' => [
 		'default' => 1000,
 	],
+	'wgQuickInstantCommonsUserAgentInfo' => [
+		'default' => 'https://wikivy.com; tech@wikivy.com',
+	],
 	'wgMaxImageArea' => [
 		'default' => 10e7,
 	],
@@ -1112,6 +1115,11 @@ $wgConf->settings += [
 		'default' => false,
 	],
 
+	// GlobalBlocking
+	'wgApplyGlobalBlocks' => [
+		'default' => true,
+	],
+
 	// GlobalCssJs
 	'wgGlobalCssJsConfig' => [
 		'default' => [
@@ -1139,6 +1147,16 @@ $wgConf->settings += [
 	],
 	'wgUseGlobalSiteCssJs' => [
 		'default' => false,
+	],
+
+	// GlobalUserPage
+	'wgGlobalUserPageAPIUrl' => [
+		'default' => 'https://login.wikivy.com/w/api.php',
+		'beta' => 'https://login.wikivy.dev/w/api.php',
+	],
+	'wgGlobalUserPageDBname' => [
+		'default' => 'loginwiki',
+		'beta' => 'loginwikibeta',
 	],
 
 	// Grant Permissions for BotPasswords and OAuth
@@ -1283,6 +1301,29 @@ $wgConf->settings += [
 	'wmgWikiLicense' => [
 		'default' => 'cc-by-sa',
 	],
+
+	// Linter
+	'wgLinterWriteNamespaceColumnStage' => [
+		'default' => true,
+	],
+	'wgLinterWriteTagAndTemplateColumnsStage' => [
+		'default' => true,
+	],
+
+	// LoginNotify
+	'wgLoginNotifyAttemptsNewIP' => [
+		'default' => 3,
+	],
+	'wgLoginNotifySeenBucketSize' => [
+		'default' => 8 * 86400,
+	],
+	'wgLoginNotifySeenExpiry' => [
+		'default' => 80 * 86400,
+	],
+	'wgLoginNotifyUseSeenTable' => [
+		'default' => true,
+	],
+
 
 	// Mail
 	'wgEnableEmail' => [
