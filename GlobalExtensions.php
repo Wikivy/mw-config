@@ -24,7 +24,7 @@ wfLoadExtensions([
 	'IPInfo',
 	'LoginNotify',
 	'ManageWiki',
-	//'MobileDetect',
+	'MobileDetect',
 	'Nuke',
 	'OATHAuth',
 	'OAuth',
