@@ -145,8 +145,21 @@ $wgConf->settings += [
 			],
 		],
 	],
-
 	'wgLogSpamBlacklistHits' => [
+		'default' => true,
+	],
+
+	// BetaFeatures
+	'wgMediaViewerIsInBeta' => [
+		'default' => false,
+	],
+	'wgVisualEditorEnableWikitextBetaFeature' => [
+		'default' => false,
+	],
+	'wgVisualEditorEnableDiffPageBetaFeature' => [
+		'default' => false,
+	],
+	'wgPopupsReferencePreviewsBetaFeature' => [
 		'default' => true,
 	],
 
@@ -1977,6 +1990,42 @@ $wgConf->settings += [
 	],
 	'wgCdnMaxAge' => [
 		'default' => 432000,
+	],
+
+	// VisualEditor
+	'wmgVisualEditorEnableDefault' => [
+		'default' => false,
+		'ext-VisualEditor' => true,
+	],
+	'wgVisualEditorEnableWikitext' => [
+		'default' => false,
+	],
+	'wgVisualEditorShowBetaWelcome' => [
+		'default' => true,
+	],
+	'wgVisualEditorUseSingleEditTab' => [
+		'default' => false,
+	],
+	'wgVisualEditorEnableDiffPage' => [
+		'default' => false,
+	],
+	'wgVisualEditorEnableVisualSectionEditing' => [
+		'default' => 'mobile',
+	],
+	'wgVisualEditorTransclusionDialogSuggestedValues' => [
+		'default' => false,
+	],
+	'wgVisualEditorTransclusionDialogInlineDescriptions' => [
+		'default' => false,
+	],
+	'wgVisualEditorTransclusionDialogBackButton' => [
+		'default' => false,
+	],
+	'wgVisualEditorTransclusionDialogNewSidebar' => [
+		'default' => false,
+	],
+	'wgVisualEditorTemplateSearchImprovements' => [
+		'default' => false,
 	],
 
 	// Wikibase
