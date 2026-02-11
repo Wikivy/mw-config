@@ -52,6 +52,10 @@ if ( $wi->isExtensionActive( 'chameleon' ) ) {
 	wfLoadExtension( 'Bootstrap' );
 }
 
+if ( $wi->isExtensionActive( 'StandardDialogs' ) ) {
+	wfLoadExtension( 'OOJSPlus' );
+}
+
 if ( $wi->isExtensionActive( 'SocialProfile' ) ) {
 	require_once "$IP/extensions/SocialProfile/SocialProfile.php";
 	//$wgSocialProfileFileBackend = 'wikivy-swift';
@@ -68,6 +72,10 @@ if ( $wi->isExtensionActive( 'VisualEditor' ) ) {
 		$wgDefaultUserOptions['visualeditor-enable'] = 0;
 		$wgDefaultUserOptions['visualeditor-editor'] = 'wikitext';
 	}
+}
+
+if ( $wi->isExtensionActive( 'CodeMirror' ) ) {
+	$wgDefaultUserOptions['usecodemirror'] = (int)$wmgCodeMirrorEnableDefault;
 }
 
 if ( $wi->isAnyOfExtensionsActive( 'WikibaseClient', 'WikibaseRepository' ) ) {
@@ -342,6 +350,13 @@ if ( $wi->isExtensionActive( 'JsonConfig' ) ) {
 		];
 	}
 }
+
+// Vector
+$vectorVersion = $wgDefaultSkin === 'vector-2022' ? '2' : '1';
+$wgVectorDefaultSkinVersionForExistingAccounts = $vectorVersion;
+
+// Don't need a global here
+unset( $vectorVersion );
 
 // Licensing variables
 
