@@ -2141,6 +2141,51 @@ $wgManageWikiExtensions = [
 		'requires' => [],
 		'section' => 'other',
 	],
+	'blogpage' => [
+		'name' => 'BlogPage',
+		'linkPage' => 'https://www.mediawiki.org/wiki/Special:MyLanguage/Extension:BlogPage',
+		'conflicts' => 'simpleblogpage',
+		'requires' => [
+			'extensions' => [
+				'comments',
+				'pollny',
+				'socialprofile',
+				'voteny',
+			],
+		],
+		'install' => [
+			'namespaces' => [
+				'Blog' => [
+					'id' => 500,
+					'searchable' => 1,
+					'subpages' => 0,
+					'protection' => 'edit',
+					'content' => 0,
+					'aliases' => [],
+					'contentmodel' => 'wikitext',
+					'additional' => []
+				],
+				'Blog_talk' => [
+					'id' => 501,
+					'searchable' => 0,
+					'subpages' => 0,
+					'protection' => '',
+					'content' => 0,
+					'aliases' => [],
+					'contentmodel' => 'wikitext',
+					'additional' => []
+				],
+			],
+			'permissions' => [
+				'user' => [
+					'permissions' => [
+						'createblogpost',
+					],
+				],
+			],
+		],
+		'section' => 'other',
+	],
 	'breadcrumbs2' => [
 		'name' => 'BreadCrumbs2',
 		'linkPage' => 'https://www.mediawiki.org/wiki/Special:MyLanguage/Extension:BreadCrumbs2',
