@@ -29,6 +29,7 @@ wfLoadExtensions([
 	'OATHAuth',
 	'OAuth',
 	'ParserFunctions',
+	'ParserMigration',
 	'Scribunto',
 	'PortableInfobox',
 	'RemovePII',
