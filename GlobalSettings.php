@@ -58,7 +58,7 @@ if ( $wi->isExtensionActive( 'SocialProfile' ) ) {
 	$wgUserBoardAllowPrivateMessages = false;
 }
 
-/*if ( $wi->isExtensionActive( 'VisualEditor' ) ) {
+if ( $wi->isExtensionActive( 'VisualEditor' ) ) {
 	$wgUseRestbaseVRS = false;
 	$wgVisualEditorDefaultParsoidClient = 'direct';
 	if ( $wmgVisualEditorEnableDefault ) {
@@ -68,7 +68,7 @@ if ( $wi->isExtensionActive( 'SocialProfile' ) ) {
 		$wgDefaultUserOptions['visualeditor-enable'] = 0;
 		$wgDefaultUserOptions['visualeditor-editor'] = 'wikitext';
 	}
-}*/
+}
 
 if ( $wi->isAnyOfExtensionsActive( 'WikibaseClient', 'WikibaseRepository' ) ) {
 	// Includes Wikibase Configuration. There is a global and per-wiki system here.
@@ -76,7 +76,7 @@ if ( $wi->isAnyOfExtensionsActive( 'WikibaseClient', 'WikibaseRepository' ) ) {
 }
 
 $wgVirtualRestConfig = [
-	'modules' => [
+	/*'modules' => [
 		'parsoid' => [
 			'url' => 'https://meta.wikivy.com/w/rest.php',
 			'domain' => $wi->server,
@@ -84,7 +84,7 @@ $wgVirtualRestConfig = [
 			'forwardCookies' => (bool)$cwPrivate,
 			'restbaseCompat' => false,
 		],
-	],
+	],*/
 	'global' => [
 		'domain' => $wgCanonicalServer,
 		'timeout' => 360,
