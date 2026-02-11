@@ -2114,6 +2114,10 @@ function wfHandleDeletedWiki() {
 
 // Define last to avoid all dependencies
 require_once '/srv/mediawiki/config/GlobalSettings.php';
+require_once '/srv/mediawiki/config/LocalWiki.php';
+
+// Configure late to ensure $wgDBname is set properly
+$wgCargoDBname = $wgDBname . 'cargo';
 
 // Don't need a global here
 unset( $wi );
