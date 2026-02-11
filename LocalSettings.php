@@ -1810,6 +1810,47 @@ $wgConf->settings += [
 		],
 	],
 
+	// Popups
+	'wgPopupsHideOptInOnPreferencesPage' => [
+		'default' => false,
+	],
+	'wgPopupsTextExtractsIntroOnly' => [
+		'default' => true,
+	],
+	'wgPopupsOptInDefaultState' => [
+		'default' => 0,
+	],
+
+	// PortableInfobox
+	'wgPortableInfoboxResponsiblyOpenCollapsed' => [
+		'default' => true,
+	],
+	'wgPortableInfoboxUseFileDescriptionPage' => [
+		'default' => false,
+	],
+	'wgPortableInfoboxUseHeadings' => [
+		'default' => true,
+	],
+	'wgPortableInfoboxCacheRenderers' => [
+		'default' => true,
+	],
+	'wgPortableInfoboxCustomImageWidth' => [
+		'default' => 300,
+	],
+
+	// Preferences
+	'+wgDefaultUserOptions' => [
+		'default' => [
+			'enotifwatchlistpages' => 0,
+			'math' => 'mathml',
+			'usebetatoolbar' => 1,
+			'usebetatoolbar-cgd' => 1,
+		],
+	],
+	'wmgCodeMirrorEnableDefault' => [
+		'default' => false,
+	],
+
 	// RemovePII
 	'wgRemovePIIAllowedWikis' => [
 		'default' => [
