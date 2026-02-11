@@ -58,7 +58,7 @@ if ( $wi->isExtensionActive( 'SocialProfile' ) ) {
 	$wgUserBoardAllowPrivateMessages = false;
 }
 
-if ( $wi->isExtensionActive( 'VisualEditor' ) ) {
+/*if ( $wi->isExtensionActive( 'VisualEditor' ) ) {
 	$wgUseRestbaseVRS = false;
 	$wgVisualEditorDefaultParsoidClient = 'direct';
 	if ( $wmgVisualEditorEnableDefault ) {
@@ -68,7 +68,7 @@ if ( $wi->isExtensionActive( 'VisualEditor' ) ) {
 		$wgDefaultUserOptions['visualeditor-enable'] = 0;
 		$wgDefaultUserOptions['visualeditor-editor'] = 'wikitext';
 	}
-}
+}*/
 
 if ( $wi->isAnyOfExtensionsActive( 'WikibaseClient', 'WikibaseRepository' ) ) {
 	// Includes Wikibase Configuration. There is a global and per-wiki system here.
