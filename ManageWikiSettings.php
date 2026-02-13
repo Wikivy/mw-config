@@ -596,7 +596,7 @@ $wgManageWikiSettings = [
 		'help' => 'Is an array of standard predefined screen widths which increases in order of size.',
 		'requires' => [],
 	],
-	'wmgMirahezeFeaturedFeedsInUserLanguage' => [
+	'wmgWikivyFeaturedFeedsInUserLanguage' => [
 		'name' => 'Should feeds honor the user\'s preferred language?',
 		'from' => 'featuredfeeds',
 		'type' => 'check',
@@ -918,7 +918,7 @@ $wgManageWikiSettings = [
 		],
 		'overridedefault' => 'cc-by-sa',
 		'section' => 'editing',
-		'help' => 'Each wiki on Miraheze is by default licensed under CC-BY-SA 4.0 although this can be changed to another supported license. If you would like to release the contributions on your wiki under another license, please let us know so that we can make it available to you. Be aware that changing the license on your wiki can have an impact on your community and should not be done lightly.',
+		'help' => 'Each wiki on Wikivy is by default licensed under CC-BY-SA 4.0 although this can be changed to another supported license. If you would like to release the contributions on your wiki under another license, please let us know so that we can make it available to you. Be aware that changing the license on your wiki can have an impact on your community and should not be done lightly.',
 		'requires' => [],
 	],
 	'wgActiveUserDays' => [
@@ -2024,7 +2024,7 @@ $wgManageWikiSettings = [
 		'type' => 'check',
 		'overridedefault' => false,
 		'section' => 'media',
-		'help' => 'By default, Miraheze enables file upload only from a local media but with this option you can upload files remotely from other sites.',
+		'help' => 'By default, Wikivy enables file upload only from a local media but with this option you can upload files remotely from other sites.',
 		'requires' => [],
 	],
 	'wgCopyUploadsFromSpecialUpload' => [
@@ -2056,14 +2056,14 @@ $wgManageWikiSettings = [
 		'help' => 'Skip lazy-loading transforms on small-dimensions images.',
 		'requires' => [],
 	],
-	'wgMirahezeCommons' => [
-		'name' => 'Enable Miraheze Commons (linking to commons.miraheze.org)',
+	'wgWikivyCommons' => [
+		'name' => 'Enable Wikivy Commons (linking to commons.wikivy.com)',
 		'from' => 'mediawiki',
 		'global' => true,
 		'type' => 'check',
 		'overridedefault' => true,
 		'section' => 'media',
-		'help' => 'This option allows you to use the Miraheze Commons file database on your wiki.',
+		'help' => 'This option allows you to use the Wikivy Commons file database on your wiki.',
 		'requires' => [],
 	],
 	'wgShowArchiveThumbnails' => [
@@ -2422,7 +2422,7 @@ $wgManageWikiSettings = [
 		'type' => 'text',
 		'overridedefault' => false,
 		'section' => 'media',
-		'help' => 'The domain name for the wiki to use as the file repository. Leave empty unless it is a custom domain. By default will be the miraheze subdomain of whatever <code>$wmgSharedUploadDBname</code> is set to below. Do not include https:// or any paths.',
+		'help' => 'The domain name for the wiki to use as the file repository. Leave empty unless it is a custom domain. By default will be the Wikivy subdomain of whatever <code>$wmgSharedUploadDBname</code> is set to below. Do not include https:// or any paths.',
 		'requires' => [],
 	],
 	'wmgSharedUploadClientDBname' => [
@@ -2432,7 +2432,7 @@ $wgManageWikiSettings = [
 		'type' => 'text',
 		'overridedefault' => false,
 		'section' => 'media',
-		'help' => 'The database name of the wiki that will use this wiki as its file repository. This value must be a valid Miraheze-hosted wiki database.',
+		'help' => 'The database name of the wiki that will use this wiki as its file repository. This value must be a valid Wikivy-hosted wiki database.',
 		'requires' => [
 			'visibility' => [
 				'state' => 'public',
@@ -2446,7 +2446,7 @@ $wgManageWikiSettings = [
 		'type' => 'text',
 		'overridedefault' => false,
 		'section' => 'media',
-		'help' => 'The database name for the wiki to use as the file repository. This value must be a valid Miraheze-hosted wiki database. The database in this field will be used for granting permission from the client database. This <b>can not</b> be a private wiki database.',
+		'help' => 'The database name for the wiki to use as the file repository. This value must be a valid Wikivy-hosted wiki database. The database in this field will be used for granting permission from the client database. This <b>can not</b> be a private wiki database.',
 		'requires' => [],
 	],
 	'wmgEnableSharedUploads' => [
@@ -2568,13 +2568,13 @@ $wgManageWikiSettings = [
 		'requires' => [],
 	],
 	'wmgSiteNoticeOptOut' => [
-		'name' => 'Opt out of global Miraheze notices',
+		'name' => 'Opt out of global Wikivy notices',
 		'from' => 'mediawiki',
 		'global' => true,
 		'type' => 'check',
 		'overridedefault' => false,
 		'section' => 'notifications',
-		'help' => 'Opts your wiki out of global Miraheze notices, only showing important notices.',
+		'help' => 'Opts your wiki out of global Wikivy notices, only showing important notices.',
 		'requires' => [],
 	],
 	'wgMinervaEnableSiteNotice' => [
@@ -3684,9 +3684,9 @@ $wgManageWikiSettings = [
 		'from' => 'mediawiki',
 		'global' => true,
 		'type' => 'text',
-		'overridedefault' => "https://$wmgUploadHostname/metawiki/3/35/Miraheze_Logo.svg",
+		'overridedefault' => "https://$wmgUploadHostname/metawiki/c/c9/Wikivy_Logo.svg",
 		'section' => 'styling',
-		'help' => 'This will replace Miraheze\'s default logo. See [[m:Help:How_to_change_my_logo_or_favicon|this link]] for how you can change it. Also sets the value of <code>$wgLogos[\'1x\']</code>.',
+		'help' => 'This will replace Wikivy\'s default logo. See [[m:Help:How_to_change_my_logo_or_favicon|this link]] for how you can change it. Also sets the value of <code>$wgLogos[\'1x\']</code>.',
 		'requires' => [],
 	],
 	'wgMFAutodetectMobileView' => [
@@ -4808,7 +4808,7 @@ $wgManageWikiSettings = [
 		'type' => 'database',
 		'overridedefault' => $wi->dbname,
 		'section' => 'wikibase',
-		'help' => 'Database identifier of the repository being used. This value must be a valid Miraheze-hosted wiki database.',
+		'help' => 'Database identifier of the repository being used. This value must be a valid Wikivy-hosted wiki database.',
 		'requires' => [],
 	],
 	'wmgAllowEntityImport' => [
