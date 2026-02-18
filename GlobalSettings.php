@@ -273,9 +273,9 @@ $wgDataDump = [
 
 // Email
 $wgSMTP = [
-	'host' => 'ssl://us1.workspace.org',
+	'host' => 'mail.wikivy.com',
 	'IDHost' => 'wikivy.com',
-	'port' => 465,
+	'port' => 25,
 	'username' => 'noreply@wikivy.com',
 	'password' => $wgWikivyEmailPassword,
 	'auth' => true,
