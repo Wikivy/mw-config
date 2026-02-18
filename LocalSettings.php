@@ -594,6 +594,7 @@ $wgConf->settings += [
 			"$IP/extensions/AntiSpoof/sql/mysql/tables-generated.sql",
 			"$IP/extensions/BetaFeatures/sql/tables-generated.sql",
 			"$IP/extensions/CheckUser/schema/mysql/tables-generated.sql",
+			"$IP/extensions/CheckUser/schema/mysql/tables-virtual-checkuser-generated.sql",
 			"$IP/extensions/DataDump/sql/data_dump.sql",
 			"$IP/extensions/Echo/sql/mysql/tables-generated.sql",
 			"$IP/extensions/GlobalBlocking/sql/mysql/tables-generated-global_block_whitelist.sql",
@@ -1147,6 +1148,12 @@ $wgConf->settings += [
 	],
 	'wgUseGlobalSiteCssJs' => [
 		'default' => false,
+	],
+
+	// GlobalPreferences
+	'wgGlobalPreferencesDB' => [
+		'default' => 'wvglobal',
+		'beta' => 'betaglobal',
 	],
 
 	// GlobalUserPage
