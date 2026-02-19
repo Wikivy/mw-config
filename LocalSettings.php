@@ -771,6 +771,9 @@ $wgConf->settings += [
 			'virtual-globalnewfiles' => [
 				'db' => $wi->getGlobalDatabase(),
 			],
+			'virtual-globalusage' => [
+				'db' => 'commonswiki',
+			],
 			'virtual-importdump' => [
 				'db' => $wi->getCentralDatabase(),
 			],
@@ -791,6 +794,9 @@ $wgConf->settings += [
 			],
 			'virtual-oathauth' => [
 				'db' => $wi->getGlobalDatabase(),
+			],
+			'virtual-oauth' => [
+				'db' => $wi->getCentralDatabase(),
 			],
 			'virtual-requestcustomdomain' => [
 				'db' => $wi->getCentralDatabase(),
@@ -944,15 +950,31 @@ $wgConf->settings += [
 	// DiscussionTools
 	'wgDiscussionTools_visualenhancements' => [
 		'default' => 'default',
-		'isvwiki' => 'available',
 	],
 	'wgDiscussionTools_visualenhancements_reply' => [
 		'default' => 'default',
-		'isvwiki' => 'available',
 	],
 	'wgDiscussionTools_visualenhancements_pageframe' => [
 		'default' => 'default',
-		'isvwiki' => 'available',
+	],
+
+	// DynamicPageList4
+	'wgDPLAllowUnlimitedCategories' => [
+		'default' => false,
+	],
+	'wgDPLAllowUnlimitedResults' => [
+		'default' => false,
+	],
+	'wgDPLMaxCategoryCount' => [
+		'default' => 8,
+	],
+	'wgDPLMaxResultCount' => [
+		'default' => 500,
+	],
+
+	// DynamicSidebar
+	'wgDynamicSidebarUsePageCategories' => [
+		'default' => false,
 	],
 
 	// Echo
@@ -1154,6 +1176,14 @@ $wgConf->settings += [
 	'wgGlobalPreferencesDB' => [
 		'default' => 'wvglobal',
 		'beta' => 'betaglobal',
+	],
+
+	// GlobalUsage
+	'wgGlobalUsageSharedRepoWiki' => [
+		'default' => false,
+	],
+	'wgGlobalUsagePurgeBacklinks' => [
+		'default' => true,
 	],
 
 	// GlobalUserPage
@@ -1476,6 +1506,22 @@ $wgConf->settings += [
 			],
 		],
 		'+metawiki' => [
+			'assistant-steward' => [
+				'abusefilter-modify-global' => true,
+				'centralauth-lock' => true,
+				'centralauth-rename' => true,
+				'createwiki' => true,
+				'createwiki-deleterequest' => true,
+				'globalblock' => true,
+				'handle-import-request-interwiki' => true,
+				'handle-import-requests' => true,
+				'managewiki-extensions' => true,
+				'managewiki-namespaces' => true,
+				'managewiki-permissions' => true,
+				'managewiki-settings' => true,
+				'managewiki-restricted' => true,
+				'noratelimit' => true,
+			],
 			'checkuser' => [
 				'abusefilter-privatedetails' => true,
 				'abusefilter-privatedetails-log' => true,
@@ -1572,6 +1618,22 @@ $wgConf->settings += [
 			],
 		],
 		'+metawikibeta' => [
+			'assistant-steward' => [
+				'abusefilter-modify-global' => true,
+				'centralauth-lock' => true,
+				'centralauth-rename' => true,
+				'createwiki' => true,
+				'createwiki-deleterequest' => true,
+				'globalblock' => true,
+				'handle-import-request-interwiki' => true,
+				'handle-import-requests' => true,
+				'managewiki-extensions' => true,
+				'managewiki-namespaces' => true,
+				'managewiki-permissions' => true,
+				'managewiki-settings' => true,
+				'managewiki-restricted' => true,
+				'noratelimit' => true,
+			],
 			'autopatrolled' => [
 				'autopatrolled' => true,
 			],
@@ -1661,6 +1723,7 @@ $wgConf->settings += [
 	],
 	'wgManageWikiPermissionsDisallowedGroups' => [
 		'default' => [
+			'assistant-steward',
 			'checkuser',
 			'checkuser-temporary-account-viewer',
 			'smwadministrator',
@@ -1808,6 +1871,240 @@ $wgConf->settings += [
 	],
 	'wgManageWikiUseCustomDomains' => [
 		'default' => true,
+	],
+
+	// MassMessage
+	'wgAllowGlobalMessaging' => [
+		'default' => false,
+		'metawiki' => true,
+		'metawikibeta' => true,
+	],
+
+	// Miscellaneous
+	'wgAllowDisplayTitle' => [
+		'default' => true,
+	],
+	'wgRestrictDisplayTitle' => [
+		'default' => true,
+		'ext-NoTitle' => false,
+	],
+	'wgCapitalLinks' => [
+		'default' => true,
+	],
+	'wgEnableMagicLinks' => [
+		'default' => [
+			'ISBN' => false,
+			'PMID' => false,
+			'RFC' => false,
+		],
+	],
+	'wgEnableProtectionIndicators' => [
+		'default' => false,
+	],
+	'wgActiveUserDays' => [
+		'default' => 30,
+	],
+	'wgEnableCanonicalServerLink' => [
+		'default' => true,
+	],
+	'wgPageCreationLog' => [
+		'default' => true,
+	],
+	'wgRCWatchCategoryMembership' => [
+		'default' => false,
+	],
+	'wgExpensiveParserFunctionLimit' => [
+		'default' => 99,
+	],
+	'wgAllowSlowParserFunctions' => [
+		'default' => false,
+	],
+	'wgExternalLinkTarget' => [
+		'default' => false,
+	],
+	'wgGitInfoCacheDirectory' => [
+		'default' => '/srv/mediawiki/cache/' . $wi->version . '/gitinfo',
+	],
+	'wgAllowExternalImages' => [
+		'default' => false,
+	],
+	'wgFragmentMode' => [
+		'default' => [
+			'html5',
+			'legacy'
+		],
+	],
+	'wgTrustedMediaFormats' => [
+		'default' => [
+			MEDIATYPE_BITMAP,
+			MEDIATYPE_AUDIO,
+			MEDIATYPE_VIDEO,
+			'image/svg+xml',
+			'application/pdf',
+		],
+		'+ext-3d' => [
+			'application/sla',
+		],
+	],
+	'wgNativeImageLazyLoading' => [
+		'default' => false,
+	],
+	'wgCrossSiteAJAXdomains' => [
+		'default' => [
+			'*.wikivy.com',
+		],
+		'beta' => [
+			'*.wikivy.dev',
+		],
+		'private' => [],
+		'wikicreatorswiki' => [
+			'meta.wikivy.com',
+		],
+	],
+	'wgWhitelistRead' => [
+		'default' => [],
+	],
+	'wgWhitelistReadRegexp' => [
+		'default' => [],
+	],
+	'wgDisabledVariants' => [
+		'default' => [],
+	],
+	'wgDefaultLanguageVariant' => [
+		'default' => false,
+	],
+	'wgCleanSignatures' => [
+		'default' => true,
+	],
+	'wgResponsiveImages' => [
+		'default' => true,
+	],
+
+	// MobileFrontend
+	'wgDefaultMobileSkin' => [
+		'default' => 'minerva',
+	],
+	'wgMFNamespacesWithoutCollapsibleSections' => [
+		// See https://github.com/wikimedia/mediawiki-extensions-MobileFrontend?tab=readme-ov-file#wgmfnamespaceswithoutcollapsiblesections
+		'default' => [
+			NS_FILE,
+			NS_CATEGORY,
+			NS_SPECIAL,
+			NS_MEDIA,
+		],
+	],
+	'wgMFAdvancedMobileContributions' => [
+		'default' => true,
+	],
+	'wgMFAmcOutreach' => [
+		'default' => false,
+	],
+	'wgMFAmcOutreachMinEditCount' => [
+		'default' => 100,
+	],
+	'wgMFAutodetectMobileView' => [
+		'default' => true,
+	],
+	'wgMFCustomSiteModules' => [
+		'default' => false,
+	],
+	'wgMFDisplayWikibaseDescriptions' => [
+		'default' => [
+			'search' => false,
+			'nearby' => false,
+			'watchlist' => false,
+			'tagline' => false,
+		],
+	],
+	'wgMFEnableBeta' => [
+		'default' => true,
+	],
+	'wgMFEnableFontChanger' => [
+		'default' => [
+			'beta' => true,
+			'base' => true,
+		],
+	],
+	'wgMFEnableMobilePreferences' => [
+		'default' => false,
+	],
+	'wgMFEnableVEWikitextEditor' => [
+		'default' => false,
+	],
+	'wgMFEnableWikidataDescriptions' => [
+		'default' => [
+			'beta' => true,
+			'base' => false,
+		],
+	],
+	'wgMFDefaultEditor' => [
+		'default' => 'preference',
+	],
+	'wgMFFallbackEditor' => [
+		'default' => 'visual',
+	],
+	'wgMFLazyLoadImages' => [
+		'default' => [
+			'beta' => true,
+			'base' => true,
+		]
+	],
+	'wgMFLazyLoadSkipSmallImages' => [
+		'default' => false,
+	],
+	'wgMFLogWrappedInfoboxes' => [
+		'default' => true,
+	],
+	'wgMFMobileHeader' => [
+		'ext-MobileFrontend' => 'X-Subdomain',
+	],
+	'wgMFNoindexPages' => [
+		'ext-MobileFrontend' => false,
+	],
+	'wgMFQueryPropModules' => [
+		'default' => [
+			'pageprops',
+		],
+	],
+	'wgMFRemovableClasses' => [
+		'default' => [
+			'beta' => [],
+			'base' => [
+				'.navbox',
+				'.vertical-navbox',
+				'.nomobile',
+			],
+		],
+	],
+	'wgMFSearchAPIParams' => [
+		'default' => [
+			'ppprop' => 'displaytitle',
+		],
+	],
+	'wgMFSearchGenerator' => [
+		'default' => [
+			'name' => 'prefixsearch',
+			'prefix' => 'ps',
+		],
+	],
+	'wgMFShowFirstParagraphBeforeInfobox' => [
+		'default' => [
+			'base' => true,
+			'beta' => true,
+		],
+	],
+	'wgMFShowMobileViewToTablets' => [
+		'default' => true,
+	],
+	'wgMFUseDesktopSpecialEditWatchlistPage' => [
+		'default' => [
+			'base' => false,
+			'beta' => false,
+			'amc' => true,
+		],
+	],
+	'wgMFUseWikibase' => [
+		'default' => false,
 	],
 
 	// OAuth
