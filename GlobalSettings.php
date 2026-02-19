@@ -56,6 +56,24 @@ if ( $wi->isExtensionActive( 'StandardDialogs' ) ) {
 	wfLoadExtension( 'OOJSPlus' );
 }
 
+if ( $wgWikivyCommons && !$cwPrivate ) {
+	wfLoadExtension( 'GlobalUsage' );
+}
+
+if ( $wi->isExtensionActive( 'InterwikiSorting' ) ) {
+	$wgInterwikiSortingInterwikiSortOrders = include __DIR__ . '/InterwikiSortOrders.php';
+}
+
+if ( $wi->isExtensionActive( 'Popups' ) ) {
+	if ( $wmgShowPopupsByDefault ) {
+		$wgPopupsHideOptInOnPreferencesPage = true;
+		$wgPopupsOptInDefaultState = '1';
+		$wgPopupsOptInStateForNewAccounts = '1';
+		$wgPopupsReferencePreviewsBetaFeature = false;
+	}
+}
+
+
 if ( $wi->isExtensionActive( 'SocialProfile' ) ) {
 	require_once "$IP/extensions/SocialProfile/SocialProfile.php";
 	//$wgSocialProfileFileBackend = 'wikivy-swift';
@@ -275,7 +293,7 @@ $wgDataDump = [
 $wgSMTP = [
 	'host' => 'mail.wikivy.com',
 	'IDHost' => 'wikivy.com',
-	'port' => 25,
+	'port' => 587,
 	'username' => 'noreply@wikivy.com',
 	'password' => $wgWikivyEmailPassword,
 	'auth' => true,
