@@ -20,6 +20,7 @@ $wgObjectCaches['redis'] = [
 	'password' => $wmgRedisPassword,
 	'loggroup' => 'redis',
 	'reportDupes' => false,
+	'persistent' => true,
 ];
 
 $wgObjectCaches['redis-session'] = [
@@ -28,6 +29,8 @@ $wgObjectCaches['redis-session'] = [
 	'password' => $wmgRedisPassword,
 	'loggroup' => 'redis',
 	'reportDupes' => false,
+	'persistent' => true,
+	'keyspace' => 'globalsession'
 ];
 
 $wgSessionCacheType = 'redis-session';
