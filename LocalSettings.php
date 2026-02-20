@@ -2369,6 +2369,46 @@ $wgConf->settings += [
 		'default' => false,
 	],
 
+	// UniversalLanguageSelector
+	'wgULSAnonCanChangeLanguage' => [
+		'default' => false,
+	],
+	'wgULSLanguageDetection' => [
+		'default' => false,
+	],
+	'wgULSPosition' => [
+		'default' => 'personal',
+	],
+	'wgULSGeoService' => [
+		'ext-Translate' => false,
+		'ext-UniversalLanguageSelector' => false,
+	],
+	'wgULSIMEEnabled' => [
+		'default' => true,
+		'gratispaideiawiki' => false,
+	],
+	'wgULSWebfontsEnabled' => [
+		'default' => true,
+	],
+
+	// UserFunctions
+	'wgUFEnabledPersonalDataFunctions' => [
+		/**
+		 * 'ip', 'realname' and/or 'useremail' should never
+		 * be enabled here under any circumstances, in order
+		 * to ensure privacy.
+		 */
+		'default' => [
+			'nickname',
+			'username',
+		],
+	],
+	'wgUFAllowedNamespaces' => [
+		'default' => [
+			NS_MEDIAWIKI => true,
+		],
+	],
+
 	// Varnish
 	'wgUseCdn' => [
 		'default' => true,
@@ -2476,6 +2516,57 @@ $wgConf->settings += [
 	],
 	'wmgWikibaseRepoPropertyNamespaceID' => [
 		'default' => 862
+	],
+
+	// WikiSEO configs
+	'wgTwitterCardType' => [
+		'default' => 'summary_large_image',
+	],
+	'wgGoogleSiteVerificationKey' => [
+		'default' => false,
+	],
+	'wgBingSiteVerificationKey' => [
+		'default' => false,
+	],
+	'wgFacebookAppId' => [
+		'default' => false,
+	],
+	'wgYandexSiteVerificationKey' => [
+		'default' => false,
+	],
+	'wgPinterestSiteVerificationKey' => [
+		'default' => false,
+	],
+	'wgNortonSiteVerificationKey' => [
+		'default' => false,
+	],
+	'wgNaverSiteVerificationKey' => [
+		'default' => false,
+	],
+	'wgWikiSeoDefaultImage' => [
+		'default' => null,
+	],
+	'wgWikiSeoDisableLogoFallbackImage' => [
+		'default' => false,
+	],
+	'wgWikiSeoEnableAutoDescription' => [
+		'default' => true,
+	],
+	'wgWikiSeoTryCleanAutoDescription' => [
+		'default' => false,
+	],
+	'wgMetadataGenerators' => [
+		'default' => [
+			'OpenGraph',
+			'Twitter',
+			'SchemaOrg',
+		],
+	],
+	'wgTwitterSiteHandle' => [
+		'default' => '',
+	],
+	'wgWikiSeoDefaultLanguage' => [
+		'default' => '',
 	],
 
 	// CreateWiki Defined Special Variables
