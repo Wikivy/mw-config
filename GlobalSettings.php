@@ -1,5 +1,10 @@
 <?php
 
+use MediaWiki\Auth\LocalPasswordPrimaryAuthenticationProvider;
+use MediaWiki\Extension\ConfirmEdit\hCaptcha\HCaptcha;
+use MediaWiki\Extension\ConfirmEdit\Store\CaptchaCacheStore;
+use MediaWiki\FileRepo\ForeignDBViaLBRepo;
+
 $wgHooks['CreateWikiGenerateDatabaseLists'][] = 'WikivyFunctions::onGenerateDatabaseLists';
 $wgHooks['ManageWikiCoreAddFormFields'][] = 'WikivyFunctions::onManageWikiCoreAddFormFields';
 $wgHooks['ManageWikiCoreFormSubmission'][] = 'WikivyFunctions::onManageWikiCoreFormSubmission';
@@ -301,6 +306,71 @@ $wgSMTP = [
 
 if ( !$wi->isExtensionActive( 'wikiseo' ) ) {
 	$wgSkinMetaTags = [ 'og:title', 'og:type' ];
+}
+
+// $wgForeignFileRepos
+if ( $wmgEnableSharedUploads && $wmgSharedUploadDBname && in_array( $wmgSharedUploadDBname, $wgLocalDatabases ) ) {
+	if ( !$wmgSharedUploadBaseUrl || $wmgSharedUploadBaseUrl === $wmgSharedUploadDBname ) {
+		$wmgSharedUploadSubdomain = substr( $wmgSharedUploadDBname, 0, -4 );
+
+		$wmgSharedUploadBaseUrl = "{$wmgSharedUploadSubdomain}.wikivy.com";
+	}
+
+	$wgForeignFileRepos[] = [
+		'class' => ForeignDBViaLBRepo::class,
+		'name' => "shared-{$wmgSharedUploadDBname}",
+		'url' => "https://static.wikivy.com/{$wmgSharedUploadDBname}",
+		'hashLevels' => 2,
+		'thumbScriptUrl' => false,
+		'transformVia404' => true,
+		'hasSharedCache' => true,
+		'descBaseUrl' => "https://{$wmgSharedUploadBaseUrl}/wiki/File:",
+		'scriptDirUrl' => "https://{$wmgSharedUploadBaseUrl}/w",
+		'fetchDescription' => true,
+		'descriptionCacheExpiry' => 86400 * 7,
+		'wiki' => $wmgSharedUploadDBname,
+		'initialCapital' => true,
+		'abbrvThreshold' => 160
+	];
+}
+
+// Miraheze Commons
+if ( $wgDBname !== 'commonswiki' && $wgWikivyCommons && strpos( wfHostname(), 'mwbeta' ) === false ) {
+	$wgForeignFileRepos[] = [
+		'class' => ForeignDBViaLBRepo::class,
+		'name' => 'wikivycommons',
+		'url' => 'https://static.wikivy.com/commonswiki',
+		'hashLevels' => 2,
+		'thumbScriptUrl' => false,
+		'transformVia404' => true,
+		'hasSharedCache' => true,
+		'descBaseUrl' => 'https://commons.wikivy.com/wiki/File:',
+		'scriptDirUrl' => 'https://commons.wikivy.com/w',
+		'fetchDescription' => true,
+		'descriptionCacheExpiry' => 86400 * 7,
+		'wiki' => 'commonswiki',
+		'initialCapital' => true,
+		'abbrvThreshold' => 160
+	];
+}
+
+if ( $wgDBname !== 'commonswikibeta' && $wgWikivyCommons && strpos( wfHostname(), 'mwbeta' ) !== false ) {
+	$wgForeignFileRepos[] = [
+		'class' => ForeignDBViaLBRepo::class,
+		'name' => 'wikivycommons',
+		'url' => 'https://static.wikivy.com/commonswikibeta',
+		'hashLevels' => 2,
+		'thumbScriptUrl' => false,
+		'transformVia404' => true,
+		'hasSharedCache' => true,
+		'descBaseUrl' => 'https://commons.wikivy.dev/wiki/File:',
+		'scriptDirUrl' => 'https://commons.wikivy.dev/w',
+		'fetchDescription' => true,
+		'descriptionCacheExpiry' => 86400 * 7,
+		'wiki' => 'commonswikibeta',
+		'initialCapital' => true,
+		'abbrvThreshold' => 160
+	];
 }
 
 // $wgLogos

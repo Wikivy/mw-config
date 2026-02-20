@@ -19,6 +19,7 @@ wfLoadExtensions([
 	'EventStreamConfig',
 	'GlobalBlocking',
 	'GlobalCssJs',
+	'GlobalNewFiles',
 	'GlobalPreferences',
 	'ImportDump',
 	'IPInfo',
