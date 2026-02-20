@@ -2538,10 +2538,10 @@ $wgExtensionMessagesFiles['SocialProfileNamespaces'] = $IP . '/extensions/Social
 $wgExtensionMessagesFiles['AvatarMagic'] = $IP . '/extensions/SocialProfile/UserProfile/includes/avatar/Avatar.i18n.magic.php';
 
 $wgLocalisationCacheConf['storeClass'] = LCStoreStaticArray::class;
-$wgLocalisationCacheConf['storeDirectory'] = '/srv/mediawiki/cache/' . $wi->version . '/l10n';
+$wgLocalisationCacheConf['storeDirectory'] = '/srv/mediawiki/cache/' . $wi->version . '/l10n/' .$wgDBname;
 $wgLocalisationCacheConf['manualRecache'] = true;
 
-if ( !file_exists( '/srv/mediawiki/cache/' . $wi->version . '/l10n/en.l10n.php' ) ) {
+if ( !file_exists( '/srv/mediawiki/cache/' . $wi->version . '/l10n/' . $wgDBname .'/en.l10n.php' ) ) {
 	$wgLocalisationCacheConf['manualRecache'] = false;
 }
 
