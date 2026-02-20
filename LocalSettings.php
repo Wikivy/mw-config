@@ -1311,6 +1311,30 @@ $wgConf->settings += [
 		],
 	],
 
+	// Imports
+	'wgImportSources' => [
+		'default' => [
+			'meta',
+			'dev',
+			'loginwiki',
+			'mw',
+			'wikipedia',
+			'metawikimedia',
+		],
+	],
+
+	'wgExportMaxHistory' => [
+		'default' => 1000
+	],
+
+	'wgExportAllowListContributors' => [
+		'default' => false,
+	],
+
+	'wgIgnoreImageErrors' => [
+		'default' => true
+	],
+
 	// JsonConfig
 	'wgJsonConfigEnableLuaSupport' => [
 		'default' => true,
@@ -2524,6 +2548,30 @@ if ( !file_exists( '/srv/mediawiki/cache/' . $wi->version . '/l10n/en.l10n.php' 
 
 // Include other configuration files
 require_once '/srv/mediawiki/config/Database.php';
+
+if ( $wgUseQuickInstantCommons ) {
+	$wgForeignFileRepos[] = [
+		'class' => Wikivy\WikivyMagic\ForeignAPIRepoWithFixedUA::class,
+		'name' => 'wikimediacommons',
+		'apibase' => 'https://commons.wikimedia.org/w/api.php',
+		'url' => 'https://upload.wikimedia.org/wikipedia/commons',
+		'thumbUrl' => 'https://upload.wikimedia.org/wikipedia/commons/thumb',
+		'directory' => $wgUploadDirectory,
+		'hashLevels' => 2,
+		'transformVia404' => true,
+		'fetchDescription' => true,
+		'descriptionCacheExpiry' => 604800,
+		'apiThumbCacheExpiry' => 0,
+		'initialCapital' => true,
+		'zones' => [
+			// actual swift containers have 'local-*'
+			'public' => [ 'container' => 'local-public' ],
+			'thumb' => [ 'container' => 'local-thumb' ],
+			'temp' => [ 'container' => 'local-temp' ],
+			'deleted' => [ 'container' => 'local-deleted' ],
+		],
+	];
+}
 
 if ( $wi->missing ) {
 	require_once '/srv/mediawiki/ErrorPages/MissingWiki.php';
