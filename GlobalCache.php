@@ -6,12 +6,12 @@ use Wikimedia\ObjectCache\MultiWriteBagOStuff;
 use Wikimedia\ObjectCache\RedisBagOStuff;
 
 $wgMemCachedServers = [
-	'mwtask01.wikivy.com:11211'
+	'127.0.0.1:11211'
 ];
 $wgMemCachedPersistent = false;
 
 $wgWikivyMagicMemcachedServers = [
-	[ 'mwtask01.wikivy.com', 11211 ]
+	[ '127.0.0.1', 11211 ]
 ];
 
 $wgObjectCaches['redis'] = [
