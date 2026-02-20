@@ -22,8 +22,6 @@ $wgObjectCaches['redis'] = [
 	'reportDupes' => false,
 ];
 
-$wgMainCacheType = 'redis';
-
 $wgObjectCaches['redis-session'] = [
 	'class' => RedisBagOStuff::class,
 	'servers' => [ 'mwtask01.wikivy.com:6379' ],
@@ -35,6 +33,11 @@ $wgObjectCaches['redis-session'] = [
 $wgSessionCacheType = 'redis-session';
 $wgCentralAuthSessionCacheType = 'redis-session';
 $wgEchoSeenTimeCacheType = 'redis-session';
+
+$wgSessionName = $wgDBname . 'Session';
+
+$wgMainCacheType = 'redis';
+$wgMessageCacheType = 'redis';
 
 $wgJobTypeConf['default'] = [
 	'class' => JobQueueRedis::class,
