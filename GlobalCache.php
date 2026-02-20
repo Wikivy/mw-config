@@ -42,6 +42,40 @@ $wgSessionName = $wgDBname . 'Session';
 $wgMainCacheType = 'redis';
 $wgMessageCacheType = 'redis';
 
+$wgLanguageConverterCacheType = CACHE_ACCEL;
+
+$wgQueryCacheLimit = 5000;
+
+// 15 days
+$wgParserCacheExpireTime = 86400 * 15;
+
+// 10 days
+$wgDiscussionToolsTalkPageParserCacheExpiry = 86400 * 10;
+
+// 3 days
+$wgRevisionCacheExpiry = 86400 * 3;
+
+// 1 day
+$wgObjectCacheSessionExpiry = 86400;
+
+// 7 days
+$wgDLPMaxCacheTime = 604800;
+
+$wgDLPQueryCacheTime = 120;
+
+$wgDPLAlwaysCacheResults = true;
+$wgDPLQueryCacheTime = 120;
+
+$wgSearchSuggestCacheExpiry = 10800;
+
+// Disable sidebar cache for select wikis as needed here
+$wgEnableSidebarCache = true;
+
+$wgUseLocalMessageCache = true;
+$wgInvalidateCacheOnLocalSettingsChange = false;
+
+$wgCdnMatchParameterOrder = false;
+
 $wgJobTypeConf['default'] = [
 	'class' => JobQueueRedis::class,
 	'redisServer' => 'mwtask01.wikivy.com:6379',
