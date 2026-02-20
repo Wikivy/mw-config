@@ -14,47 +14,40 @@ $wgWikivyMagicMemcachedServers = [
 	[ 'mwtask01.wikivy.com', 11211 ]
 ];
 
+$wgObjectCaches['redis'] = [
+	'class' => RedisBagOStuff::class,
+	'servers' => [ 'mwtask01.wikivy.com:6379' ],
+	'password' => $wmgRedisPassword,
+	'loggroup' => 'redis',
+	'reportDupes' => false,
+];
+
 $wgMainCacheType = 'redis';
-$wgMessageCacheType = 'redis';
 
-$wgParserCacheType = 'redis';
+$wgObjectCaches['redis-session'] = [
+	'class' => RedisBagOStuff::class,
+	'servers' => [ 'mwtask01.wikivy.com:6379' ],
+	'password' => $wmgRedisPassword,
+	'loggroup' => 'redis',
+	'reportDupes' => false,
+];
 
-$wgLanguageConverterCacheType = CACHE_ACCEL;
+$wgSessionCacheType = 'redis-session';
+$wgCentralAuthSessionCacheType = 'redis-session';
+$wgEchoSeenTimeCacheType = 'redis-session';
 
-$wgQueryCacheLimit = 5000;
-
-// 15 days
-$wgParserCacheExpireTime = 86400 * 15;
-
-// 10 days
-$wgDiscussionToolsTalkPageParserCacheExpiry = 86400 * 10;
-
-// 3 days
-$wgRevisionCacheExpiry = 86400 * 3;
-
-// 1 day
-$wgObjectCacheSessionExpiry = 86400;
-
-// 7 days
-$wgDLPMaxCacheTime = 604800;
-
-$wgDLPQueryCacheTime = 120;
-$wgDplSettings['queryCacheTime'] = 120;
-
-$wgSearchSuggestCacheExpiry = 10800;
-
-$wgEnableSidebarCache = true;
-
-$wgUseLocalMessageCache = true;
-$wgInvalidateCacheOnLocalSettingsChange = false;
-
-$wgResourceLoaderUseObjectCacheForDeps = true;
-
-$wgCdnMatchParameterOrder = false;
+$wgJobTypeConf['default'] = [
+	'class' => JobQueueRedis::class,
+	'redisServer' => 'mwtask01.wikivy.com:6379',
+	'redisConfig' => [
+		'connectTimeout' => 2,
+		'password' => $wmgRedisPassword,
+		'compression' => 'gzip',
+	],
+	'daemonized' => true,
+];
 
 if ( PHP_SAPI === 'cli' ) {
 	// APC not available in CLI mode
 	$wgLanguageConverterCacheType = CACHE_NONE;
 }
-
-$wgUseGzip = true;

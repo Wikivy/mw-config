@@ -2548,6 +2548,7 @@ if ( !file_exists( '/srv/mediawiki/cache/' . $wi->version . '/l10n/en.l10n.php' 
 
 // Include other configuration files
 require_once '/srv/mediawiki/config/Database.php';
+require_once '/srv/mediawiki/config/GlobalCache.php';
 
 if ( $wgUseQuickInstantCommons ) {
 	$wgForeignFileRepos[] = [
