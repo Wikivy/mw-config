@@ -2291,6 +2291,73 @@ $wgConf->settings += [
 		],
 	],
 
+	// RottenLinks
+	'wgRottenLinksCurlTimeout' => [
+		'default' => 10,
+	],
+	'wgRottenLinksExcludeWebsites' => [
+		'default' => [
+			'localhost',
+			'127.0.0.1',
+		],
+	],
+
+	// Robot policy
+	'wgDefaultRobotPolicy' => [
+		'default' => 'index,follow',
+	],
+	'wgNamespaceRobotPolicies' => [
+		'default' => [
+			NS_SPECIAL => 'noindex',
+		],
+	],
+
+	// RSS Settings
+	'wgRSSAllowImageTag' => [
+		'default' => false,
+	],
+	'wgRSSAllowLinkTag' => [
+		'default' => false,
+	],
+	'wgRSSCacheAge' => [
+		'default' => 3600,
+	],
+	'wgRSSItemMaxLength' => [
+		'default' => 200,
+	],
+	'wgRSSDateDefaultFormat' => [
+		'default' => 'Y-m-d H:i:s',
+	],
+	'wgRSSUrlWhitelist' => [
+		'ext-RSSfeed' => [
+			'*',
+		],
+	],
+
+	// Scribunto
+	'wgCodeEditorEnableCore' => [
+		'default' => true,
+	],
+	'wgScribuntoDefaultEngine' => [
+		'default' => 'luasandbox',
+	],
+	'wgScribuntoUseCodeEditor' => [
+		'default' => true,
+	],
+	'wgScribuntoSlowFunctionThreshold' => [
+		'default' => 0.99,
+	],
+
+	// SecurePoll
+	'wgSecurePollUseLogging' => [
+		'default' => true,
+	],
+	'wgSecurePollSingleTransferableVoteEnabled' => [
+		'default' => true,
+	],
+	'wgSecurePollUseNamespace' => [
+		'default' => true,
+	],
 
 	// Server
 	'wgArticlePath' => [
@@ -2350,9 +2417,133 @@ $wgConf->settings += [
 		'default' => 999,
 	],
 
+	// TemplateStyles
+	'wgTemplateStylesAllowedUrls' => [
+		'default' => [
+			'audio' => [
+				'<^(?:https:)?//upload\\.wikimedia\\.org/wikipedia/commons/>',
+				'<^(?:https:)?//static\\.wikivy\\.com/>',
+				'<^(?:https:)?//[a-zA-Z0-9\\-]\\.wikivy\\.com/w/img_auth\\.php/>',
+				'<^(?:https:)?//' . preg_quote( $wi->server ) . '/w/img_auth\\.php/>',
+			],
+			'image' => [
+				'<^(?:https:)?//upload\\.wikimedia\\.org/wikipedia/commons/>',
+				'<^(?:https:)?//static\\.wikivy\\.com/>',
+				'<^(?:https:)?//[a-zA-Z0-9\\-]\\.wikivy\\.com/w/img_auth\\.php/>',
+				'<^(?:https:)?//' . preg_quote( $wi->server ) . '/w/img_auth\\.php/>',
+			],
+			'svg' => [
+				'<^(?:https:)?//upload\\.wikimedia\\.org/wikipedia/commons/[^?#]*\\.svg(?:[?#]|$)>',
+				'<^(?:https:)?//static\\.wikivy\\.com/>',
+				'<^(?:https:)?//[a-zA-Z0-9\\-]\\.wikivy\\.com/w/img_auth\\.php/>',
+				'<^(?:https:)?//' . preg_quote( $wi->server ) . '/w/img_auth\\.php/[^?#]*\\.svg(?:[?#]|$)>',
+			],
+			'font' => [],
+			'namespace' => [
+				'<.>',
+			],
+			'css' => [],
+		],
+	],
+
+	// TextExtracts
+	'wgExtractsRemoveClasses' => [
+		'default' => [
+			'table',
+			'div',
+			'figure',
+			'script',
+			'input',
+			'style',
+			'ul.gallery',
+			'mw\\:editsection',
+			'editsection',
+			'meta',
+			'sup.reference',
+			'ol.references',
+			'.error',
+			'.nomobile',
+			'.noprint',
+			'.noexcerpt',
+			'.sortkey',
+			'.mw-empty-elt',
+		],
+	],
+
 	// Theme
 	'wgDefaultTheme' => [
 		'default' => '',
+	],
+
+	// Time
+	'wgLocaltimezone' => [
+		'default' => 'UTC',
+	],
+	'wgAmericanDates' => [
+		'default' => false,
+	],
+
+	// Translate
+	'wgTranslateDisabledTargetLanguages' => [
+		'default' => [],
+		'metawiki' => [
+			'*' => [
+				'en' => 'English is the source language.',
+				'cdo' => 'This language code should remain unused. Localise in cdo-hant, cdo-hans or cdo-latn please.',
+				'cdo-hani' => 'This language code should remain unused. Localise in cdo-hant or cdo-hans please.',
+				'cjy' => 'This language code should remain unused. Localise in cjy-hans or cjy-hant please.',
+				'cpx' => 'This language code should remain unused. Localise in cpx-hans, cpx-hant or cpx-latn please.',
+				'crh' => 'This language code should remain unused. Localise in crh-cyrl or crh-latn please.',
+				'gan' => 'This language code should remain unused. Localise in gan-hans or gan-hant please.',
+				'hak' => 'This language code should remain unused. Localise in hak-hans, hak-hant or hak-latn please.',
+				'iu' => 'This language code should remain unused. Localise in ike-cans or ike-latn please.',
+				'ku' => 'This language code should remain unused. Localise in ku-arab or ku-latn please.',
+				'mnc' => 'This language code should remain unused. Localise in mnc-latn or mnc-mong please.',
+				'nan' => 'This language code should remain unused. Localise in nan-hans, nan-hant, nan-latn-pehoeji or nan-latn-tailo please.',
+				'nan-hani' => 'This language code should remain unused. Localise in nan-hans or nan-hant please.',
+				'nan-latn' => 'This language code should remain unused. Localise in nan-latn-pehoeji or nan-latn-tailo please.',
+				'sh' => 'This language code should remain unused. Localise in sh-cyrl or sh-latn please.',
+				'tg' => 'This language code should remain unused. Localise in tg-cyrl or tg-latn please.',
+				'wuu' => 'This language code should remain unused. Localise in wuu-hans or wuu-hant please.',
+				'yue' => 'This language code should remain unused. Localise in yue-hans or yue-hant please.',
+				'zh' => 'This language code should remain unused. Localise in zh-hans, zh-hant or zh-hk please.',
+				'zh-cn' => 'This language code should remain unused. Localise in zh-hans please.',
+				'zh-tw' => 'This language code should remain unused. Localise in zh-hant please.',
+				'zh-mo' => 'This language code should remain unused. Localise in zh-hk please.',
+				'zh-my' => 'This language code should remain unused. Localise in zh-hans please.',
+				'zh-sg' => 'This language code should remain unused. Localise in zh-hans please.',
+			],
+		],
+	],
+	'wgTranslateDocumentationLanguageCode' => [
+		'default' => false,
+	],
+	'wgTranslateNumerals' => [
+		'default' => true,
+	],
+	'wgTranslatePageTranslationULS' => [
+		'default' => false,
+	],
+	'wgTranslateTranslationServices' => [
+		'default' => [],
+	],
+	'wgTranslateTranslationDefaultService' => [
+		'default' => false,
+	],
+
+	// TorBlock
+	'wgTorIPs' => [
+		'default' => [
+			'91.198.174.232',
+			'208.80.152.2',
+			'208.80.152.134'
+		]
+	],
+	'wgTorTagChanges' => [
+		'default' => false
+	],
+	'wgTorDisableAdminBlocks' => [
+		'default' => false
 	],
 
 	// Uploads
