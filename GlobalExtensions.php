@@ -22,6 +22,7 @@ wfLoadExtensions([
 	'GlobalNewFiles',
 	'GlobalPreferences',
 	'ImportDump',
+	'InterwikiDispatcher',
 	'IPInfo',
 	'LoginNotify',
 	'ManageWiki',
